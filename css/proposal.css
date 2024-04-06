@@ -18,6 +18,10 @@ header h1 {
   font-size: 70px;
 }
 
+#table-contents ul li a:hover {
+  font-weight: bold;
+}
+
 h2{
   background-color: #82cbffd4;
 }
