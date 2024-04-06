@@ -10,3 +10,16 @@ header h1{
     width: 50%;
     height: auto;
 }
+
+h2{
+  background-color: #82cbffd4;
+}
+
+p, li{
+ font-size: 17px; 
+}
+
+h3{
+  font-size: 20px;
+  background-color: rgb(214, 236, 255);
+}
