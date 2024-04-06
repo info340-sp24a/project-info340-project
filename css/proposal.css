@@ -1,14 +1,21 @@
-header h1{
-    font-weight: 300;
-    text-align: center;
-  }
+header {
+  position: relative;
+}
 
-.top-img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    height: auto;
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+header h1 {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 70px;
 }
 
 h2{
