@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+.header-container{
+    display: flex;
+    align-items: center;
+    padding: 32px;
+    background-color: #b4d4d4;
+}
+
+div{
+    flex-grow: 2;
+}
+
+ul, li{
+    flex-grow: 1;
+}
+
+.search-bar{
+    border: 2px solid gray;
+    margin: 2rem auto;
+    text-align: center;
+    text-decoration: none;
+    width: 40vw;
+    font-size: 1.5rem;
+}
+
+.clear-filter, .toggle-btn {
+    background: none;
+    border: 2px solid #292b2c;
+    border-radius: 10px;
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 .25rem;
+}
+
+.clear-filter{
+    background-color: #34547c;
+    color: white;
+}
