@@ -27,5 +27,40 @@
         </ul>
         <a>Sign In</a> 
     </header>
+    <main>
+        <form action="submit-resort-info.php" method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="form-group">
+                <label for="resortName">Resort Name:</label>
+                <input type="text" id="resortName" name="resortName" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Brief Description:</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="numberOfLifts">Number of Lifts:</label>
+                <input type="number" id="numberOfLifts" name="numberOfLifts" required>
+            </div>
+            <div class="form-group">
+                <label for="ticketPrice">Ticket Price ($):</label>
+                <input type="text" id="ticketPrice" name="ticketPrice" required>
+            </div>
+            <div class="form-group">
+                <label for="operatedCompany">Operated by Company:</label>
+                <input type="text" id="operatedCompany" name="operatedCompany" required>
+            </div>
+            <div class="form-group">
+                <label for="resortImage">Resort Image:</label>
+                <input type="file" id="resortImage" name="resortImage" accept="image/*">
+            </div>
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </main>
 </body>
 </html>
