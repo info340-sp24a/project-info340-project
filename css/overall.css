@@ -2,22 +2,22 @@
     box-sizing: border-box;
 }
 
-.header-container{
+.header-container {
     display: flex;
     align-items: center;
     padding: 32px;
     background-color: #b4d4d4;
 }
 
-div{
+div {
     flex-grow: 2;
 }
 
-ul, li{
+ul, li {
     flex-grow: 1;
 }
 
-.search-bar{
+.search-bar {
     border: 2px solid gray;
     margin: 2rem auto;
     text-align: center;
@@ -38,7 +38,7 @@ ul, li{
     padding: 0 .25rem;
 }
 
-.clear-filter{
+.clear-filter {
     background-color: #34547c;
     color: white;
 }
