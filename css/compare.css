@@ -9,6 +9,10 @@
     background-color: #b4d4d4;
 }
 
+.nav-item a, #signin{
+    font-size: 1.2rem;
+}
+
 div {
     flex-grow: 2;
 }
@@ -43,6 +47,7 @@ ul, li {
     color: white;
 }
 
+<<<<<<< HEAD:css/compare.css
 .compare-container {
     display: flex;
     justify-content: center;
@@ -88,4 +93,41 @@ ul, li {
 
 .search-button:hover {
     background-color: #0056b3;
+=======
+.introduction p, .introduction a{
+    font-size: 1.2rem;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.introduction{
+    display:flex;
+    background-color: #34547c;
+}
+
+.introduction img{
+    width: 50%;
+    object-fit: cover;
+}
+
+.introduction div{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.introduction h1{
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+
+footer p{
+    background-color: #b4d4d4;
+    margin-bottom: 0;
+>>>>>>> 257e98330601013de160b4614c30ccf1b29398f0:css/overall.css
 }
