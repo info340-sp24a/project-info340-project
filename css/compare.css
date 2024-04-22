@@ -47,6 +47,53 @@ ul, li {
     color: white;
 }
 
+<<<<<<< HEAD:css/compare.css
+.compare-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.resort-compare {
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px; 
+    text-align: center;
+}
+
+.search {
+    margin-bottom: 20px;
+}
+
+.resort-card {
+    text-align: center;
+}
+
+.resort-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.resort-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.resort-info h2 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.resort-details {
+    margin-top: 10px;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+=======
 .introduction p, .introduction a{
     font-size: 1.2rem;
     margin-left: 20px;
@@ -82,4 +129,5 @@ ul, li {
 footer p{
     background-color: #b4d4d4;
     margin-bottom: 0;
+>>>>>>> 257e98330601013de160b4614c30ccf1b29398f0:css/overall.css
 }
