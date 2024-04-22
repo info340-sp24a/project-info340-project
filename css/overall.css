@@ -1,0 +1,187 @@
+* {
+    box-sizing: border-box;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    padding: 32px;
+    background-color: #b4d4d4;
+}
+
+.nav-item a, #signin{
+    font-size: 1.2rem;
+}
+
+div {
+    flex-grow: 2;
+}
+
+ul, li {
+    flex-grow: 1;
+}
+
+.search-bar {
+    border: 2px solid gray;
+    margin: 2rem auto;
+    text-align: center;
+    text-decoration: none;
+    width: 40vw;
+    font-size: 1.5rem;
+}
+
+.clear-filter, .toggle-btn {
+    background: none;
+    border: 2px solid #292b2c;
+    border-radius: 10px;
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 .25rem;
+}
+
+.clear-filter {
+    background-color: #34547c;
+    color: white;
+}
+
+.introduction p, .introduction a{
+    font-size: 1.2rem;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.introduction{
+    display:flex;
+    background-color: #34547c;
+}
+
+.introduction img{
+    width: 50%;
+    object-fit: cover;
+}
+
+.introduction div{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.introduction h1{
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+
+footer p{
+    background-color: #b4d4d4;
+    margin-bottom: 0;
+}
+
+ /* compare */
+.compare-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.resort-compare {
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px; 
+    text-align: center;
+}
+
+.search {
+    margin-bottom: 20px;
+}
+
+.resort-card {
+    text-align: center;
+}
+
+.resort-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.resort-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.resort-info h2 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.resort-details {
+    margin-top: 10px;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+ /* upload */
+.upload-form {
+    display: flex;
+    flex-wrap: wrap; 
+    max-width: 1000px;
+    margin: 1.25rem auto;
+    padding: 1.25rem; 
+    background-color: #e3eceb; 
+    border: 5px solid #e3eceb;
+    border-radius: 0.5rem; 
+    box-shadow: 5px 5px lightgray; 
+}
+
+.form-group {
+    margin-bottom: 15px; 
+}
+
+label {
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold; 
+    color: #34547c; 
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    width: 100%;
+    padding: 5px 5px;
+    border: 1px solid #b4d4d4; 
+    border-radius: 4px; 
+    font-size: 1rem;
+}
+
+input[type="submit"] {
+    background-color: #b4d4d4; 
+    color: #34547c; 
+    padding: 5px 5px; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 1.2rem; 
+}
+
+input[type="submit"]:hover {
+    background-color: #34547c; 
+    color: #b4d4d4;
+}
+
+
+.form-group-left, .form-group-right {
+    flex-basis: 48%; 
+    max-width: 48%;
+}
