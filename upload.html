@@ -29,43 +29,108 @@
         <a id="signin">Sign In</a> 
     </header>
     <main>
-        <div class="upload-form">
-            <div class="form-group-left">
-                <div class="form-group">
-                    <label for="resort-name">Resort Name:</label>
-                    <input type="text" id="resort-name" placeholder="Enter the resort name">
+        <form>
+            <div class="container form-content">
+                <div class="justify-content-evenly mt-4">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="resort-name" class="form-label">Resort Name:</label>
+                            <input type="text" id="resort-name" placeholder="Enter the resort name" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="state" class="form-label">State:</label>
+                            <select class="form-select">
+                                <option selected>Select the state</option>
+                                <option value="AL">AL</option>
+                                <option value="AK">AK</option>
+                                <option value="AZ">AZ</option>
+                                <option value="AR">AR</option>
+                                <option value="CA">CA</option>
+                                <option value="CO">CO</option>
+                                <option value="CT">CT</option>
+                                <option value="DE">DE</option>
+                                <option value="FL">FL</option>
+                                <option value="GA">GA</option>
+                                <option value="HI">HI</option>
+                                <option value="ID">ID</option>
+                                <option value="IL">IL</option>
+                                <option value="IN">IN</option>
+                                <option value="IA">IA</option>
+                                <option value="KS">KS</option>
+                                <option value="KY">KY</option>
+                                <option value="LA">LA</option>
+                                <option value="ME">ME</option>
+                                <option value="MD">MD</option>
+                                <option value="MA">MA</option>
+                                <option value="MI">MI</option>
+                                <option value="MN">MN</option>
+                                <option value="MS">MS</option>
+                                <option value="MO">MO</option>
+                                <option value="MT">MT</option>
+                                <option value="NE">NE</option>
+                                <option value="NV">NV</option>
+                                <option value="NH">NH</option>
+                                <option value="NJ">NJ</option>
+                                <option value="NM">NM</option>
+                                <option value="NY">NY</option>
+                                <option value="NC">NC</option>
+                                <option value="ND">ND</option>
+                                <option value="OH">OH</option>
+                                <option value="OK">OK</option>
+                                <option value="OR">OR</option>
+                                <option value="PA">PA</option>
+                                <option value="RI">RI</option>
+                                <option value="SC">SC</option>
+                                <option value="SD">SD</option>
+                                <option value="TN">TN</option>
+                                <option value="TX">TX</option>
+                                <option value="UT">UT</option>
+                                <option value="VT">VT</option>
+                                <option value="VA">VA</option>
+                                <option value="WA">WA</option>
+                                <option value="WV">WV</option>
+                                <option value="WI">WI</option>
+                                <option value="WY">WY</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="description" class="form-label">Brief Description:</label>
+                            <input type="text" id="description" placeholder="Enter a brief description" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="num-lifts" class="form-label">Number of Lifts:</label>
+                            <input type="range" class="form-range" min="0" max="50" id="lift-range">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="ticket-price" class="form-label">Ticket Price ($):</label>
+                            <input type="number" id="ticket-price" placeholder="Enter ticket price" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="pass-company" class="form-label">Pass Company:</label>
+                            <select class="form-select" id="pass-company">
+                                <option selected>Select the company</option>
+                                <option value="IKON">IKON</option>
+                                <option value="EPIC">EPIC</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="resort-image" class="form-label">Resort Image:</label>
+                            <input type="file" id="resort-image" class="form-control">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="state">State:</label>
-                    <input type="text" id="state" placeholder="Enter the state">
-                </div>
-                <div class="form-group">
-                    <label for="description">Brief Description:</label>
-                    <input type="text" id="description" placeholder="Enter a brief description">
-                </div>
-                <div class="form-group">
-                    <label for="num-lifts">Number of Lifts:</label>
-                    <input type="number" id="num-lifts" placeholder="Enter number of lifts">
+                <div class="mt-4 d-grid gap-2 col-2 mx-auto">
+                    <button type="submit" class="btn btn-outline-success submit-btn">Submit</button>
                 </div>
             </div>
-            <div class="form-group-right">
-                <div class="form-group">
-                    <label for="ticket-price">Ticket Price ($):</label>
-                    <input type="number" id="ticket-price" placeholder="Enter ticket price">
-                </div>
-                <div class="form-group">
-                    <label for="pass-company">Pass Company:</label>
-                    <input type="text" id="pass-company" placeholder="Enter pass company">
-                </div>
-                <div class="form-group">
-                    <label for="resort-image">Resort Image:</label>
-                    <input type="file" id="resort-image">
-                </div>
-            </div>
-            <div class="submit-button">
-                <input type="submit" value="Submit">
-            </div>
-        </div>
+        </form>
     </main>
 </body>
 </html>
