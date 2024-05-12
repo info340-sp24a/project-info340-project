@@ -9,11 +9,20 @@
     background-color: #b4d4d4;
 }
 
+.app-name, .app-name:hover {
+    color: #292b2c;
+    text-decoration: none;
+}
+
+.nav {
+    display: none;
+}
+
 .nav-item a, #signin{
     font-size: 1.2rem;
 }
 
-div {
+.nameAndDes {
     flex-grow: 2;
 }
 
@@ -63,12 +72,8 @@ ul, li {
     object-fit: cover;
 }
 
-.introduction div{
-    display:flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
+.introduction article{
+    text-align: center;
     color: white;
     margin-bottom: 20px;
 }
@@ -82,6 +87,12 @@ ul, li {
 footer p{
     background-color: #b4d4d4;
     margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+    .nav {
+        display: flex;
+    }
 }
 
  /* compare */

@@ -13,11 +13,11 @@
 </head>
 <body>
     <header class="header-container">
-        <div>
-        <h1><a>Ski Resorts</a></h1>
+        <div class="nameAndDes">
+        <h1><a class="app-name" href="index.html">Ski Resorts</a></h1>
         <p>Experience the thrill of the slopes like never before</p>
         </div>
-        <ul class="nav d-none d-md-flex ">
+        <ul class="nav">
             <li class="nav-item">
                 <a href="index.html">Home</a>
             </li>
@@ -30,17 +30,19 @@
         </ul>
         <a id="signin">Sign In</a> 
     </header>
+    <main>
     <div class="filter-container">
         <form>
-            <input aria-label="Ski-search-bar (hit enter)" class="nav-link active search-bar" placeholder="Search Ski Resort (Type and hit enter)" type="search" name="Search" autocomplete="off" value="">
+            <label for="search-bar" class="visually-hidden">Search Ski Resorts</label>
+            <input class="nav-link active search-bar" id="search-bar" placeholder="Search Ski Resort (Type and hit enter)" type="search" name="Search" autocomplete="off" value="">
         </form>
         <button class="toggle-btn">Search Filters</button>
         <button class="clear-filter">Clear Filters</button>
     </div>
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-3">
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
             <div class="card">
-            <img src="img/snoqualmie.jpg" style="height: 15rem;" class="card-img-top" alt="snoqualmie">
+            <img src="img/snoqualmie.jpg" class="card-img-top" alt="snoqualmie">
             <div class="card-body">
                 <h5 class="card-title">Snoqualmie Summit</h5>
                 <p class="card-text">Washington</p>
@@ -48,9 +50,9 @@
             </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-3">
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
             <div class="card">
-            <img src="img/crystal.jpg" style="height: 15rem;" class="card-img-top" alt="crystal">
+            <img src="img/crystal.jpg" class="card-img-top" alt="crystal">
             <div class="card-body">
                 <h5 class="card-title">Crystal Mountain Resort</h5>
                 <p class="card-text">Washington</p>
@@ -58,9 +60,9 @@
             </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-3">
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
             <div class="card">
-            <img src="img/Steve.jpg" style="height: 15rem;" class="card-img-top" alt="crystal">
+            <img src="img/Steve.jpg" class="card-img-top" alt="crystal">
             <div class="card-body">
                 <h5 class="card-title">Steve Pass</h5>
                 <p class="card-text">Washington</p>
@@ -68,9 +70,9 @@
             </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-3">
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
             <div class="card">
-            <img src="img/Baker.jpg" style="height: 15rem;" class="card-img-top" alt="crystal">
+            <img src="img/Baker.jpg" class="card-img-top" alt="crystal">
             <div class="card-body">
                 <h5 class="card-title">Mont Baker</h5>
                 <p class="card-text">Washington</p>
@@ -79,6 +81,7 @@
             </div>
         </div>
     </div>
+    </main>
     <footer>
         <p> © 2024 Ski Resorts 340</p>
     </footer>
