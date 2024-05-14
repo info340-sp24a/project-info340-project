@@ -1,0 +1,85 @@
+[
+
+    {
+        "Name": "Steve Pass"
+        "State": "WA",
+        "Price": "$110 PER DAY",
+        "Number of Slopes": "There are 39 km of slopes and 20 km of ski routes available. 10 lifts transport the guests",
+        "Area": "1,125 Acres",
+        "Altitude": "The winter sports area is situated between the elevations of 1,170 and 1,750 m.",
+        "Mountains": "Stevens Pass is located on the crest of the Cascade Range.",
+        "Average Snowfall": "460 inches",
+        "Night Ski": "Stevens at night is an experience like no other and a great time to enjoy expansive slopes and runs for all ability levels.",
+        "Official Website": "https://www.stevenspass.com/"
+      },
+
+     {
+        "Name": "Crystal Mountain Resort",
+        "State": "24/25 IKON PASS
+        Includes all 59 destinations with NO BLACKOUTS
+        
+        Adult
+        (Age 23+)
+        $1,359USD
+        Young Adult
+        (Ages 13-22)
+        $1,019USD",
+        "Number of Slopes": "There are 50 km of slopes available. 11 lifts transport the guests.",
+        "Area": "The largest ski resort in Washington State with 2,600 acres & over 50 named runs.",
+        "Altitude": "1,341 m - 2,137 m (Difference 796 m)",
+        "Mountains": "Located on the northeast edge of Mount Rainier National Park, the resort offers stunning views of Mount Rainier and the Cascade Range.",
+        "Average Snowfall": "486 inches",
+        "Night Ski": "Yes, Crystal Mountain offers night skiing on select dates, primarily during weekends and holidays.",
+        "Official Website": "https://www.crystalmountainresort.com/"
+      },
+
+      {
+        "Name": "Snoqualmie Summit",
+        "State": "WA",
+        "Price": "Limited quantities available. Available at spring prices as supplies last. Sales will resume at summer prices on sale June 1.
+            $439
+            Senior (62-69)
+            $649
+            Adult (26-61)
+            $519
+            Young Adult (19-25)
+            $469
+            Teen (13-18)
+            $399
+            Youth (7-12)
+            $149
+            Child (0-6)
+            $219
+            Super Senior (70-79)",
+        "Number of Slopes": "There are 27.9 km of slopes and 100 km of ski routes available. 21 lifts transport the guests.",
+        "Area": "1,914 acres",
+        "Altitude": "800 m - 1180 m",
+        "Mountains": "Located in the Cascade Range, the resort spans four distinct ski areas: Alpental, Summit West, Summit Central, and Summit East.",
+        "Average Snowfall": "244 inches",
+        "Night Ski": "The Summit at Snoqualmie proudly offers the most night skiing terrain in the U.S., with lit terrain at three unique mountain areas.",
+        "Official Website": "https://summitatsnoqualmie.com/"
+      },
+      
+    {
+        "Name": "Mont Baker",
+        "State": "WA",
+        "Price": "2FULL DAY
+        Prices listed here do not include 8.0% Washington State sales tax.
+        
+        Ticket Type	Age	PRICE Tax Not Included
+        ADULT	16 - 59	91.20
+        YOUTH	11 - 15	56.48
+        CHILD	7 - 10	38.89
+        SENIOR	60 - 69	76.85
+        SUPER SENIOR	70+	53.70
+        BEGINNER CHAIR ONLY - ADULT**	16 - 69	55.56
+        BEGINNER CHAIR ONLY - YOUTH**	11 - 15	46.30",
+        "Number of Slopes": "There are 100 km of slopes available. 10 lifts transport the guests.",
+        "Area": "1,000 acres",
+        "Altitude": "The winter sports area is situated between the elevations of 1,070 and 1,525 m.",
+        "Mountains": "Mount Baker is part of the Cascade Range, known for its prominent volcanic peaks.",
+        "Average Snowfall": "641 inches",
+        "Night Ski": "No",
+        "Official Website": "https://www.mtbaker.us/"
+      }]
+      
