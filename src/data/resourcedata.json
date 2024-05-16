@@ -1,0 +1,42 @@
+[
+    {
+        "Name": "Steve Pass",
+        "State": "WA",
+        "Price": 110,
+        "Number of Slopes": 50,
+        "Description": "good place to go",
+        "Company": "IKON",
+        "img": "/img/Steve.jpg"
+      },
+
+     {
+        "Name": "Crystal Mountain Resort",
+        "State": "WA",
+        "Price": 90,
+        "Number of Slopes": 40,
+        "Description": "nice place to go",
+        "Company": "IKON",
+        "img": "/img/crystal.jpg"
+      },
+
+      {
+        "Name": "Snoqualmie Summit",
+        "State": "WA",
+        "Price": 100,
+        "Number of Slopes": 80,
+        "Description": "nice place to go",
+        "Company": "EPIC",
+        "img": "/img/snoqualmie.jpg"
+      },
+      
+    {
+        "Name": "Mont Baker",
+        "State": "WA",
+        "Price": 105,
+        "Number of Slopes": 80,
+        "Description": "beautiful place to go",
+        "Company": "Other",
+        "img": "/img/Baker.jpg"
+      }
+]
+      
