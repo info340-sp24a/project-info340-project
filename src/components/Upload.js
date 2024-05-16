@@ -1,5 +1,7 @@
 import React from "react"
 import '../index.css'
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 function StateSelector(props) {
     const states = [
@@ -18,8 +20,7 @@ function StateSelector(props) {
     })
   
     return (
-      <select className="form-select">
-        <option selected>Select the state</option>
+      <select className="form-select" defaultValue='Select the state'>
         {stateArray}
       </select>
     );
@@ -27,51 +28,42 @@ function StateSelector(props) {
 
 
 
-export function UploadForm(props) {
+  export function UploadForm(props) {
     return (
         <form>
             <div className="container form-content">
-                <div className="justify-content-evenly mt-4">
-                    <div className="row mb-4">
-                        <div className="col-md-6">
-                            <label for="resort-name" className="form-label">Resort Name:</label>
-                            <input type="text" id="resort-name" placeholder="Enter the resort name" className="form-control" />
-                        </div>
-                        <div className="col-md-6">
-                            <label for="state" className="form-label">State:</label>
-                            {StateSelector}
-                        </div>
+                <div className="row mb-4">
+                    {/* Photo Upload */}
+                    
+                    <div className="col-md-6">
+                        <label htmlFor="resort-image" className="form-label">Resort Image upload:</label>
+                        <input type="file" id="resort-image" className="form-control photo-upload"/>
                     </div>
-                    <div className="row mb-4">
-                        <div className="col-md-6">
-                            <label for="description" className="form-label">Brief Description:</label>
-                            <input type="text" id="description" placeholder="Enter a brief description" className="form-control"/>
-                        </div>
-                        <div className="col-md-6">
-                            <label for="num-lifts" className="form-label">Number of Lifts:</label>
-                            <input type="range" className="form-range" min="0" max="50" id="lift-range"/>
-                        </div>
-                    </div>
-                    <div className="row mb-4">
-                        <div className="col-md-6">
-                            <label for="ticket-price" className="form-label">Ticket Price ($):</label>
-                            <input type="number" id="ticket-price" placeholder="Enter ticket price" className="form-control"/>
-                        </div>
-                        <div className="col-md-6">
-                            <label for="pass-company" className="form-label">Pass Company:</label>
-                            <select className="form-select" id="pass-company">
-                                <option selected>Select the company</option>
-                                <option value="IKON">IKON</option>
-                                <option value="EPIC">EPIC</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row mb-4">
-                        <div className="col-md-6">
-                            <label for="resort-image" className="form-label">Resort Image:</label>
-                            <input type="file" id="resort-image" className="form-control"/>
-                        </div>
+
+                    {/* Form Content */}
+                    <div className="col-md-6">
+                        <label htmlFor="resort-name" className="form-label">Resort Name:</label>
+                        <input type="text" id="resort-name" placeholder="Enter the resort name" className="form-control" />
+                    
+                        <label htmlFor="state" className="form-label">State:</label>
+                        <StateSelector />
+
+                        <label htmlFor="description" className="form-label">Brief Description:</label>
+                        <input type="text" id="description" placeholder="Enter a brief description" className="form-control"/>
+
+                        <label htmlFor="num-lifts" className="form-label">Number of Lifts:</label>
+                        <input type="range" className="form-range" min="0" max="50" id="lift-range"/>
+
+                        <label htmlFor="ticket-price" className="form-label">Ticket Price ($):</label>
+                        <input type="number" id="ticket-price" placeholder="Enter ticket price" className="form-control"/>
+
+                        <label htmlFor="pass-company" className="form-label">Pass Company:</label>
+                        <select className="form-select" id="pass-company" defaultValue='Select the company'>
+                            <option disabled>Select the company</option>
+                            <option value="IKON">IKON</option>
+                            <option value="EPIC">EPIC</option>
+                            <option value="Other">Other</option>
+                        </select>
                     </div>
                 </div>
                 <div className="mt-4 d-grid gap-2 col-2 mx-auto">
@@ -79,5 +71,5 @@ export function UploadForm(props) {
                 </div>
             </div>
         </form>
-    )
+    );
 }

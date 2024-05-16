@@ -145,10 +145,7 @@ footer p{
 
  /* upload */
 
- .container{
-    max-width: 100%;
-    height: 100%;
- }
+
 
  .container.form-content {
     background-color: #34547c; 
@@ -158,3 +155,8 @@ footer p{
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
  }
 
+
+.photo-upload {
+    height: 70%; 
+    flex-grow: 1; 
+}

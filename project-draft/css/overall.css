@@ -145,16 +145,13 @@ footer p{
 
  /* upload */
 
- .container{
-    max-width: 100%;
-    height: 100%;
- }
 
- .container.form-content {
-    background-color: #34547c; 
-    color: #b4d4d4;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
- }
+ .photo-upload-container {
+    height: 100%; 
+    display: flex;
+    flex-direction: column; 
+}
 
+.photo-upload {
+    flex-grow: 1; 
+}
