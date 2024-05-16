@@ -37,6 +37,44 @@
             <input class="nav-link active search-bar" id="search-bar" placeholder="Search Ski Resort (Type and hit enter)" type="search" name="Search" autocomplete="off" value="">
         </form>
         <button class="toggle-btn">Search Filters</button>
+        <div class="advanced-search-active">
+                <div class='search-sc'>
+                    <h3>State</h3>
+                    <select id="stateSelect" class="state-select">
+                        <option value="">Select the state</option>
+                        <option value='WA'>WA</option>
+                    </select>
+                    <h3>Pass</h3>
+                    <select id="passSelect" class="pass-select">
+                        <option value="">Select the company</option>
+                        <option value='IKON'>IKON</option>
+                        <option value='EPIC'>EPIC</option>
+                        <option value='Other'>Other</option>
+                    </select>
+                </div>
+                <div className='search-pn'>
+                    <form class="number-range">
+                        <h3>Price</h3>
+                        <label for="min">Min:</label>
+                        <br>
+                        <input id="min" class="number-input" type="number" name="min price" autocomplete="off" value="1">
+                        <br>
+                        <label for="max">Max:</label>
+                        <br>
+                        <input id="max" class="number-input" placeholder="151" type="number" name="max price" autocomplete="off" value="151">
+                    </form>
+                    <form class="number-range">
+                        <h3>Number of slope</h3>
+                        <label for="min">Min:</label>
+                        <br>
+                        <input id="min" class="number-input" type="number" name="min slope" autocomplete="off" value="1">
+                        <br>
+                        <label for="max">Max:</label>
+                        <br>
+                        <input id="max" class="number-input" placeholder="151" type="number" name="max slope" autocomplete="off" value="151">
+                    </form>
+                </div>
+        </div>
         <button class="clear-filter">Clear Filters</button>
     </div>
     <div class="row">
