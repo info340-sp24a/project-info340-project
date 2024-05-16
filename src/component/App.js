@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import {HeaderBar} from './GenerateHeader';
-import { GenerateSandF } from './SearchandFilter';
+import {HeaderBar} from './Public/GenerateHeader.js';
+import { GenerateSandF } from './Homepage/SearchandFilter.js';
 import INITIAL_RESORTS from '../data/resourcedata.json'
-import { CardsPanel } from './CardsPanel';
-import {Footer} from './Footer.js'
-import { UploadForm } from './Upload.js';
+import { CardsPanel } from './Homepage/CardsPanel.js';
+import {Footer} from './Public/CreateFooter.js'
+import { UploadForm } from './Uploadpage/Upload.js';
 
 export default function App(){
 
@@ -22,9 +22,9 @@ export default function App(){
       <>
           <HeaderBar />
           <main>
-              {/* <GenerateSandF filterResortFunction = {filterResort}/>
-              <CardsPanel resourceData={filteredResorts}/> */}
-              <UploadForm />
+              <GenerateSandF filterResortFunction = {filterResort}/>
+              <CardsPanel resourceData={filteredResorts}/>
+              {/*<UploadForm />*/}
           </main>
           <Footer />
       </>

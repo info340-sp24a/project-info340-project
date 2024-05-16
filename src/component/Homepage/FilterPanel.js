@@ -16,22 +16,23 @@ export function FilterPanel(props){
 
     return(
         <div className="advanced-search-active">
-    <div className='search-sc'>
+        <div className='search-sc'>
         <h3>State</h3>
-        <select id="stateSelect" className="state-select">
-            <option value="">Select the state</option>
+        <label htmlFor="stateSelect" className="form-label">Resort Image upload:</label>
+        <select id="stateSelect" className="state-select" defaultValue='Select the state'>
+            <option disabled>Select the state</option>
             {StateChoice}
         </select>
         <h3>Pass</h3>
-        <select id="passSelect" className="pass-select">
-            <option value="">Select the company</option>
+        <select id="passSelect" className="pass-select" defaultValue='Select the company'>
+            <option disabled>Select the company</option>
             <option value='IKON'>IKON</option>
             <option value='EPIC'>EPIC</option>
             <option value='Other'>Other</option>
         </select>
     </div>
     <div className='search-pn'>
-        <form className="number-range">
+        <form className="number-range" id='mi'>
             <h3>Price</h3>
             <label htmlFor="minPrice">Min:</label>
             <br />

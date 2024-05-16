@@ -1,7 +1,7 @@
 [
     {
         "Name": "Steve Pass",
-        "State": "WA",
+        "State": "Washington",
         "Price": 110,
         "Number of Slopes": 50,
         "Description": "good place to go",
@@ -11,7 +11,7 @@
 
      {
         "Name": "Crystal Mountain Resort",
-        "State": "WA",
+        "State": "Washington",
         "Price": 90,
         "Number of Slopes": 40,
         "Description": "nice place to go",
@@ -21,7 +21,7 @@
 
       {
         "Name": "Snoqualmie Summit",
-        "State": "WA",
+        "State": "Washington",
         "Price": 100,
         "Number of Slopes": 80,
         "Description": "nice place to go",
@@ -31,7 +31,7 @@
       
     {
         "Name": "Mont Baker",
-        "State": "WA",
+        "State": "Washington",
         "Price": 105,
         "Number of Slopes": 80,
         "Description": "beautiful place to go",

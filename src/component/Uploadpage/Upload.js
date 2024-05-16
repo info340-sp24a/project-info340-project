@@ -1,18 +1,16 @@
 import React from "react"
-import '../index.css'
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 
 function StateSelector(props) {
-    const states = [
-      "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
-      "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
-      "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
-      "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
-      "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
-    ];
+    const StateOptions = [
+        "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware",
+        "Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky",
+        "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri",
+        "Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina",
+        "North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota",
+        "Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin",
+        "Wyoming"]
 
-    const stateArray = states.map((state) => {
+    const stateArray = StateOptions.map((state) => {
         const transformed = (
             <option key={state} value={state}>{state}</option>
         )
@@ -20,7 +18,8 @@ function StateSelector(props) {
     })
   
     return (
-      <select className="form-select" defaultValue='Select the state'>
+      <select id="state" className="form-select" defaultValue='Select the state'>
+        <option disabled>Select the state</option>
         {stateArray}
       </select>
     );
@@ -52,7 +51,7 @@ function StateSelector(props) {
                         <input type="text" id="description" placeholder="Enter a brief description" className="form-control"/>
 
                         <label htmlFor="num-lifts" className="form-label">Number of Lifts:</label>
-                        <input type="range" className="form-range" min="0" max="50" id="lift-range"/>
+                        <input type="range" className="form-range" min="0" max="50" id="num-lifts"/>
 
                         <label htmlFor="ticket-price" className="form-label">Ticket Price ($):</label>
                         <input type="number" id="ticket-price" placeholder="Enter ticket price" className="form-control"/>
