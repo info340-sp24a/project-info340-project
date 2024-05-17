@@ -3,25 +3,6 @@ import React from 'react';
 function ResortComparison(resort) {
     return (
         <div>
-            <header className="header-container">
-                <div className="nameAndDes">
-                    <h1><a href="/">Ski Resorts</a></h1>
-                    <p>Experience the thrill of the slopes like never before</p>
-                </div>
-                <ul className="nav">
-                    <li className="nav-item">
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="upload.html">Upload</a>
-                    </li>
-                    <li className="nav-item">
-                        <a href="compare.html">Compare</a>
-                    </li>
-                </ul>
-                <a href="/signin" id="signin">Sign In</a>
-            </header>
-
             <div className="compare-container mt-5">
                 {/* Resort 1 Column */}
                 <div className="resort-compare">
