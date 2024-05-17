@@ -23,10 +23,10 @@ export default function App(){
       <>
           <HeaderBar />
           <main>
-            {/* <SummaryApp /> */}
+            <SummaryApp />
             {/* <GenerateSandF filterResortFunction = {filterResort}/>
             <CardsPanel resourceData={filteredResorts}/> */}
-            <UploadForm />
+            {/* <UploadForm /> */}
           </main>
           <Footer />
       </>

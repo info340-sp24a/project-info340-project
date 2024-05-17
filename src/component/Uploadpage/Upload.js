@@ -28,8 +28,6 @@ function StateSelector(props) {
     );
   }
 
-
-
   function TextInput({ id, label, placeholder, type = "text"}) {
     return (
       <div className="mb-3">
