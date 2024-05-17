@@ -21,7 +21,7 @@ export function GenerateSandF({filterResortFunction}){
 
  return( 
  <div className="filter-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="search">
             <label htmlFor="search-bar" className="visually-hidden">Search Ski Resorts</label>
             <input className="nav-link active search-bar" id="search-bar" placeholder="Search Ski Resort (Type and hit enter)" type="search" name="Search" autoComplete="off" value={searchInput} onChange={handleInputChange}/>
         </form>
