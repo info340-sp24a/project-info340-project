@@ -7,7 +7,8 @@ function ResortComparison(resort) {
                 {/* Resort 1 Column */}
                 <div className="resort-compare">
                     <div className="search">
-                        <input type="text" placeholder="Select Resort 1" className="resort-input mb-2"/>
+                        <label htmlFor="resort1">Select Resort 1:</label>
+                        <input type="text" id="resort1" placeholder="Select Resort 1" className="resort-input mb-2"/>
                         <button className="search-button">Find Resort</button>
                     </div>
 
@@ -28,7 +29,8 @@ function ResortComparison(resort) {
                 {/* Resort 2 Column */}
                 <div className="resort-compare">
                     <div className="search">
-                        <input type="text" placeholder="Select Resort 2" className="resort-input mb-2"/>
+                        <label htmlFor="resort2">Select Resort 2:</label>
+                        <input type="text" id="resort2" placeholder="Select Resort 2" className="resort-input mb-2"/>
                         <button className="search-button">Find Resort</button>
                     </div>
 
