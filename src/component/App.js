@@ -5,6 +5,10 @@ import INITIAL_RESORTS from '../data/resourcedata.json'
 import { CardsPanel } from './Homepage/CardsPanel.js';
 import {Footer} from './Public/CreateFooter.js'
 import { UploadForm } from './Uploadpage/Upload.js';
+import { CreateCrystal } from './Public/Crystal.js';
+import { CreateBaker } from './Public/Baker.js';
+import { CreateSnoq } from './Public/Snoqualmie.js';
+import { CreateSteve } from './Public/Steve.js';
 
 export default function App(){
 
@@ -15,7 +19,7 @@ export default function App(){
   }
 
   const filteredResorts = INITIAL_RESORTS.filter(resort => 
-    resort.Name.toLowerCase().includes(currentInput)
+    resort.Name.toLowerCase().includes(currentInput.toLocaleLowerCase())
   );
 
   return (
@@ -25,6 +29,10 @@ export default function App(){
               <GenerateSandF filterResortFunction = {filterResort}/>
               <CardsPanel resourceData={filteredResorts}/>
               {/*<UploadForm />*/}
+              {/*<CreateCrystal />*/}
+              {/*<CreateBaker />*/}
+              {/*<CreateSnoq />*/}
+              {/*<CreateSteve />*/}
           </main>
           <Footer />
       </>
