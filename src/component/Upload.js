@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import '../index.css'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -21,6 +21,7 @@ function StateSelector(props) {
   
     return (
       <select className="form-select" defaultValue='Select the state'>
+        <option key='default' value='Enter a state'>Enter a state</option>
         {stateArray}
       </select>
     );
@@ -28,48 +29,104 @@ function StateSelector(props) {
 
 
 
-  export function UploadForm(props) {
+  function TextInput({ id, label, placeholder, type = "text"}) {
     return (
-        <form>
-            <div className="container form-content">
-                <div className="row mb-4">
-                    {/* Photo Upload */}
-                    
-                    <div className="col-md-6">
-                        <label htmlFor="resort-image" className="form-label">Resort Image upload:</label>
-                        <input type="file" id="resort-image" className="form-control photo-upload"/>
-                    </div>
-
-                    {/* Form Content */}
-                    <div className="col-md-6">
-                        <label htmlFor="resort-name" className="form-label">Resort Name:</label>
-                        <input type="text" id="resort-name" placeholder="Enter the resort name" className="form-control" />
-                    
-                        <label htmlFor="state" className="form-label">State:</label>
-                        <StateSelector />
-
-                        <label htmlFor="description" className="form-label">Brief Description:</label>
-                        <input type="text" id="description" placeholder="Enter a brief description" className="form-control"/>
-
-                        <label htmlFor="num-lifts" className="form-label">Number of Lifts:</label>
-                        <input type="range" className="form-range" min="0" max="50" id="lift-range"/>
-
-                        <label htmlFor="ticket-price" className="form-label">Ticket Price ($):</label>
-                        <input type="number" id="ticket-price" placeholder="Enter ticket price" className="form-control"/>
-
-                        <label htmlFor="pass-company" className="form-label">Pass Company:</label>
-                        <select className="form-select" id="pass-company" defaultValue='Select the company'>
-                            <option disabled>Select the company</option>
-                            <option value="IKON">IKON</option>
-                            <option value="EPIC">EPIC</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div>
-                <div className="mt-4 d-grid gap-2 col-2 mx-auto">
-                    <button type="submit" className="btn btn-outline-primary">Submit</button>
-                </div>
-            </div>
-        </form>
+      <div className="mb-3">
+        <label htmlFor={id} className="form-label">{label}:</label>
+        <input type={type} id={id} placeholder={placeholder} className="form-control" />
+      </div>
     );
-}
+  }
+
+  function NumInput({ id, label, min, max, value, onChange}) {
+    return (
+      <div className="mb-3">
+        <label htmlFor={id} className="form-label">
+            {label}: <span>{value}</span>
+        </label>
+        <input
+          type="range"
+          className="form-range"
+          min={min}
+          max={max}
+          value={value}
+          onChange={onChange}
+          id={id}
+        />
+      </div>
+    );
+  }
+  
+  function SelectInput({ id, label, options }) {
+    return (
+      <div className="mb-3">
+        <label htmlFor={id} className="form-label">{label}:</label>
+        <select id={id} className="form-select">
+          <option disabled value="">Select the company</option>
+          {options.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+      </div>
+    );
+  }
+  
+  export function UploadForm() {
+    const [numLifts, setNumLifts] = useState(0);
+    const [ticketPrice, setTicketPrice] = useState(0);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // collect data
+        console.log("Form submitted");
+    };
+
+    const handleNumLiftsChange = (event) => {
+        setNumLifts(event.target.value);
+    };
+    
+      const handleTicketPriceChange = (event) => {
+        setTicketPrice(event.target.value);
+    };
+  
+    return (
+      <form onSubmit={handleSubmit}>
+        <section className="container form-content">
+          <div className="row mb-4">
+            <div className="col-md-6">
+              <TextInput id="resort-image" label="Resort Image upload" type="file" />
+            </div>
+  
+            <div className="col-md-6">
+              <TextInput id="resort-name" label="Resort Name" placeholder="Enter the resort name" />
+              <div className="mb-3">
+                <label htmlFor="state" className="form-label">State:</label>
+                <StateSelector />
+              </div>
+              <TextInput id="description" label="Brief Description" placeholder="Enter a brief description" />
+              <NumInput
+              id="num-lifts"
+              label="Number of Lifts"
+              min="0"
+              max="50"
+              value={numLifts}
+              onChange={handleNumLiftsChange}
+            />
+            <NumInput
+              id="ticket-price"
+              label="Ticket Price"
+              min="0"
+              max="1000"
+              value={ticketPrice}
+              onChange={handleTicketPriceChange}
+            />
+              <SelectInput id="pass-company" label="Pass Company" options={["IKON", "EPIC", "Other"]} defaultValue="" />
+            </div>
+          </div>
+          <div className="mt-4 d-grid gap-2 col-2 mx-auto">
+            <button type="submit" className="btn btn-outline-primary">Submit</button>
+          </div>
+        </section>
+      </form>
+    );
+  }

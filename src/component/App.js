@@ -5,6 +5,7 @@ import INITIAL_RESORTS from '../data/resourcedata.json'
 import { CardsPanel } from './CardsPanel';
 import {Footer} from './Footer.js'
 import { UploadForm } from './Upload.js';
+import {SummaryApp} from './SkiSummary/SummaryApp.js'
 
 export default function App(){
 
@@ -22,9 +23,11 @@ export default function App(){
       <>
           <HeaderBar />
           <main>
+            <SummaryApp />
               {/* <GenerateSandF filterResortFunction = {filterResort}/>
               <CardsPanel resourceData={filteredResorts}/> */}
-              <UploadForm />
+              {/* <UploadForm /> */}
+              
           </main>
           <Footer />
       </>

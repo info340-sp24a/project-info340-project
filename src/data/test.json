@@ -1,0 +1,29 @@
+{
+    "2023-2024": [
+      {
+        "resort": "Resort A",
+        "date": "2023-10-15",
+        "skiTime": 4,
+        "skiDistance": 20,
+        "verticalDrop": 500,
+        "speed": 50,
+        "runs": 5,
+        "arrivalTime": "08:00 AM",
+        "temperature": -5,
+        "skiPartner": "John Doe"
+      },
+      {
+        "resort": "Resort B",
+        "date": "2023-11-20",
+        "skiTime": 6,
+        "skiDistance": 30,
+        "verticalDrop": 600,
+        "speed": 60,
+        "runs": 8,
+        "arrivalTime": "07:00 AM",
+        "temperature": -10,
+        "skiPartner": "Jane Smith"
+      }
+
+    ]
+  }
