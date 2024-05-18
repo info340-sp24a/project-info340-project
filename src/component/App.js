@@ -27,9 +27,9 @@ export default function App(){
       <>
           <HeaderBar />
           <main>
-              <GenerateSandF filterResortFunction = {filterResort}/>
-              <CardsPanel resourceData={filteredResorts}/>
-              {/*<UploadForm />*/}
+              {/* <GenerateSandF filterResortFunction = {filterResort}/>
+              <CardsPanel resourceData={filteredResorts}/> */}
+              <UploadForm />
               {/*<CreateCrystal />*/}
               {/*<CreateBaker />*/}
               {/*<CreateSnoq />*/}
