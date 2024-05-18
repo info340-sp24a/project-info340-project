@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {HeaderBar} from './Public/GenerateHeader.js';
 import { GenerateSandF } from './Homepage/SearchandFilter.js';
 import INITIAL_RESORTS from '../data/resourcedata.json'
+import {SummaryApp} from './SkiSummary/SummaryApp.js'
 import { CardsPanel } from './Homepage/CardsPanel.js';
 import {Footer} from './Public/CreateFooter.js'
 import { UploadForm } from './Uploadpage/Upload.js';
