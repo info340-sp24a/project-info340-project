@@ -10,6 +10,7 @@ import { CreateBaker } from './Public/Baker.js';
 import { CreateSnoq } from './Public/Snoqualmie.js';
 import { CreateSteve } from './Public/Steve.js';
 import { ResortComparison } from './ComparePage/ResortComparison.js';
+import { SummaryApp } from './SummaryPage/Summary.js';
 
 export default function App(){
 
@@ -27,8 +28,9 @@ export default function App(){
       <>
           <HeaderBar />
           <main>
-              <GenerateSandF filterResortFunction = {filterResort}/>
-              <CardsPanel resourceData={filteredResorts}/>
+            <SummaryApp />
+              {/* <GenerateSandF filterResortFunction = {filterResort}/>
+              <CardsPanel resourceData={filteredResorts}/> */}
               {/* <UploadForm /> */}
               {/*<CreateCrystal />*/}
               {/*<CreateBaker />*/}
