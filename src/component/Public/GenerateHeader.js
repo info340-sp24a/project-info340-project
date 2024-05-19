@@ -19,7 +19,7 @@ export function HeaderBar(props) {
             <a href="compare.html">Compare</a>
         </li>
     </ul>
-    <a id="signin">Sign In</a> 
+    <a id="signin">Sign In</a>
 </header>
 );
 }
