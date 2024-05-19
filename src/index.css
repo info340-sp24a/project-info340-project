@@ -14,10 +14,6 @@
     text-decoration: none;
 }
 
-.nav {
-    display: flex;
-}
-
 
 .nav-item a, #signin{
     font-size: 1.2rem;
