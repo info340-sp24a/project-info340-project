@@ -1,22 +1,22 @@
 import React from 'react';
-
+import { NavLink } from 'react-router-dom';
 
 export function HeaderBar(props) {
     return (
 <header className="header-container">
     <div className="nameAndDes">
-    <h1><a className="app-name" href="index.html">Ski Resorts</a></h1>
+    <h1><NavLink className="app-name" to="/index">Ski Resorts</NavLink></h1>
     <p>Experience the thrill of the slopes like never before</p>
     </div>
     <ul className="nav">
         <li className="nav-item">
-            <a href="index.html">Home</a>
+            <NavLink to="/index">Home</NavLink>
         </li>
         <li className="nav-item">
-            <a href="upload.html">Upload</a>
+            <NavLink to="/upload">Upload</NavLink>
         </li>
         <li className="nav-item">
-            <a href="compare.html">Compare</a>
+            <NavLink to="/compare">Compare</NavLink>
         </li>
     </ul>
     <a id="signin">Sign In</a>
