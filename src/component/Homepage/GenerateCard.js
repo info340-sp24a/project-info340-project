@@ -1,21 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
-export function GenerateCard(props){
-  const {resortData} = props;
-
+export function GenerateCard({ resortData }) {
   return (
     <div className="col-12 col-md-6 col-lg-3 mb-4">
-    <div className="card">
-        <img src={resortData.img} className="card-img-top" alt= {resortData.Name}/>
-        <div className="card-body">
-            <h5 className="card-title">{resortData.Name}</h5>
-            <p className="card-text">{resortData.State}</p>
-            <Link to={`/index/${resortData.Name}`} className="btn btn-info">
-              View More
-            </Link>
-        </div>
+      <Card>
+        <Card.Img variant="top" src={resortData.img} alt={resortData.Name} />
+        <Card.Body>
+          <Card.Title>{resortData.Name}</Card.Title>
+          <Card.Text>{resortData.State}</Card.Text>
+          <Link to={`/index/${resortData.Name}`}>
+            <Button variant="info">View More</Button>
+          </Link>
+        </Card.Body>
+      </Card>
     </div>
-</div>
   );
 }
