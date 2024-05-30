@@ -1,25 +1,27 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 export function HeaderBar(props) {
-    return (
-<header className="header-container">
-    <div className="nameAndDes">
-    <h1><a className="app-name" href="index.html">Ski Resorts</a></h1>
-    <p>Experience the thrill of the slopes like never before</p>
-    </div>
-    <ul className="nav">
+  return (
+    <header className="header-container">
+      <div className="nameAndDes">
+        <h1><Link className="app-name" to="/">Ski Resorts</Link></h1>
+        <p>Experience the thrill of the slopes like never before</p>
+      </div>
+      <ul className="nav">
         <li className="nav-item">
-            <a href="index.html">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li className="nav-item">
-            <a href="upload.html">Upload</a>
+          <Link to="/upload">Upload</Link>
         </li>
         <li className="nav-item">
-            <a href="compare.html">Compare</a>
+          <Link to="/compare">Compare</Link>
         </li>
-    </ul>
-    <a id="signin">Sign In</a> 
-</header>
-);
+        <li className="nav-item">
+          <Link to="/summary">Summary</Link>
+        </li>
+      </ul>
+    </header>
+  );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../../index.css';
+import '../index.css';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { StateSelector } from "./SelectState";
