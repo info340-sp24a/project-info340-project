@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue, push, set } from 'firebase/database';
 import { TextInput } from "./InputText";
 import { NumInput } from "./InputNum";
-import '../index.css'; // Make sure to import your CSS file
+import '../index.css'; 
 
 function SeasonSelector({ seasons, selectedSeason, onChange }) {
   if (seasons.length === 0) {
@@ -20,7 +20,7 @@ function SeasonSelector({ seasons, selectedSeason, onChange }) {
   );
 }
 
-function UploadForm({ onSubmit }) {
+function UploadForm({ onSubmit, currentUser }) {
   const [resorts, setResorts] = useState([]);
   const [selectedResort, setSelectedResort] = useState("");
   const [skiDate, setSkiDate] = useState("");
@@ -45,6 +45,11 @@ function UploadForm({ onSubmit }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!currentUser) {
+      console.error("User not signed in");
+      return;
+    }
+
     const formData = {
       resort: selectedResort,
       date: skiDate,
@@ -149,7 +154,16 @@ function UploadForm({ onSubmit }) {
         </div>
 
         <div className="mt-4 d-grid gap-2 col-2 mx-auto">
-          <button type="submit" className="btn btn-outline-primary">Submit</button>
+        {currentUser ? (
+          <button type="submit" className="btn btn-outline-light" disabled={!currentUser}>Submit</button>
+        ) : (
+          <>
+            <button type="submit" className="btn btn-danger" disabled={!currentUser}>Submit</button>
+            <div className="alert alert-warning mt-2" role="alert">
+              You need to sign in to submit data.
+            </div>
+          </>
+        )}
         </div>
       </section>
     </form>
@@ -160,7 +174,7 @@ function Summary({ data }) {
   if (!data || data.length === 0) {
     return (
       <div className="alert alert-warning" role="alert">
-        No data available for the selected season. Please enter your ski trips to generate a report.
+        No data available for the selected season.
       </div>
     );
   }
@@ -274,8 +288,8 @@ export function SummaryApp({ currentUser }) {
     if (!currentUser) return;
 
     const db = getDatabase();
-    const userSeasonsRef = ref(db, `users/${currentUser.uid}/seasons`);
-    
+    const userSeasonsRef = ref(db, `users/${currentUser.userId}/seasons`);
+
     onValue(userSeasonsRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -299,10 +313,13 @@ export function SummaryApp({ currentUser }) {
   };
 
   const handleFormSubmit = (formData) => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      console.error("User not signed in");
+      return;
+    }
 
     const db = getDatabase();
-    const seasonRef = ref(db, `users/${currentUser.uid}/seasons/${selectedSeason}`);
+    const seasonRef = ref(db, `users/${currentUser.userId}/seasons/${selectedSeason}`);
     const newTripRef = push(seasonRef);
     set(newTripRef, formData);
   };
@@ -313,8 +330,7 @@ export function SummaryApp({ currentUser }) {
         <h1 className="text-center mb-5">Snow Season Summary</h1>
         <div className="d-flex justify-content-center">
           <div className="row w-100">
-
-            <UploadForm onSubmit={handleFormSubmit} />
+            <UploadForm onSubmit={handleFormSubmit} currentUser={currentUser} />
             <div className="col-12 col-lg-6 mx-auto">
               <SeasonSelector
                 seasons={seasons}

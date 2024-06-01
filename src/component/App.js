@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getDatabase, ref } from 'firebase/database';
 import { HeaderBar } from './Public/GenerateHeader.js';
 import { GenerateSandF } from './Homepage/SearchandFilter.js';
 import INITIAL_RESORTS from '../data/resourcedata.json';
@@ -16,19 +15,28 @@ export default function App() {
   const [currentInput, setcurrentInput] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
 
+  const changeUserFunction = (user) => {
+    setCurrentUser(user);
+  };
+
   const filterResort = (ResortInfo) => {
     setcurrentInput(ResortInfo);
-  }
+  };
 
   const filteredResorts = INITIAL_RESORTS.filter(resort =>
-    resort.Name.toLowerCase().includes(currentInput.toLocaleLowerCase())
+    resort.Name.toLowerCase().includes(currentInput.toLowerCase())
   );
 
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser({ uid: user.uid, email: user.email, displayName: user.displayName, photoURL: user.photoURL });
+        setCurrentUser({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL
+        });
       } else {
         setCurrentUser(null);
       }
@@ -39,7 +47,7 @@ export default function App() {
   return (
     <Router>
       <>
-        <HeaderBar currentUser={currentUser} />
+        <HeaderBar currentUser={currentUser} changeUserFunction={changeUserFunction} />
         <main>
           <Routes>
             <Route path="/" element={
@@ -49,9 +57,9 @@ export default function App() {
               </>
             }/>
             <Route path="/compare" element={<ResortComparison />} />
-            <Route path="/upload" element={<UploadForm />} />
+            <Route path="/upload" element={<UploadForm currentUser={currentUser} />} />
             <Route path="/summary" element={<SummaryApp currentUser={currentUser} />} />
-            <Route path="/signin" element={<SignInPage currentUser={currentUser} changeUserFunction={setCurrentUser} />} />
+            <Route path="/signin" element={<SignInPage currentUser={currentUser} changeUserFunction={changeUserFunction} />} />
           </Routes>
         </main>
         <Footer />

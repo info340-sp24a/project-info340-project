@@ -1,9 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 
-export function HeaderBar({ currentUser, handleSignOut }) {
+export function HeaderBar({ currentUser, changeUserFunction }) {
   const auth = getAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        changeUserFunction(null); // Clear the user data
+        navigate('/signin'); // Redirect to the sign-in page
+      })
+      .catch((error) => {
+        console.error("Sign-out error:", error);
+      });
+  };
 
   return (
     <header className="header-container">
