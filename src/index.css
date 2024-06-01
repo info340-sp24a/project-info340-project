@@ -2,10 +2,11 @@
     box-sizing: border-box;
 }
 
+
 .header-container {
     display: flex;
     align-items: center;
-    padding: 32px;
+    padding: 0.5%;
     background-color: #b4d4d4;
 }
 
@@ -210,9 +211,34 @@ footer p{
  }
 
  .container.form-content {
-    background-color: #34547c; 
-    color: #b4d4d4;
+    background-color: #4A5C8A; 
+    color: #BACDD9;
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
  }
+
+
+/* summary */
+
+.container-wrapper {
+    width: 70%;
+    height: 100%;
+    min-height: 86vh; 
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-image: linear-gradient(25deg, #262e72, #434e9d, #6070cb, #7f94fb);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+
+  }
+
+  .summary-page {
+    background-color: #b4d4d4;
+    color: #BACDD9;
+  }
+

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import TESTDATA from '../data/test.json';
-import resourceData from '../data/resourcedata.json'; // Import the JSON file
+import React, { useState, useEffect } from 'react';
+import { getDatabase, ref, onValue, push, set } from 'firebase/database';
 import { TextInput } from "./InputText";
 import { NumInput } from "./InputNum";
+import '../index.css'; // Make sure to import your CSS file
 
-// SeasonSelector component
 function SeasonSelector({ seasons, selectedSeason, onChange }) {
+  if (seasons.length === 0) {
+    return null;
+  }
+
   const seasonOptions = seasons.map((season) => (
     <option key={season} value={season}>{season}</option>
   ));
@@ -17,8 +20,8 @@ function SeasonSelector({ seasons, selectedSeason, onChange }) {
   );
 }
 
-// UploadForm component
 function UploadForm({ onSubmit }) {
+  const [resorts, setResorts] = useState([]);
   const [selectedResort, setSelectedResort] = useState("");
   const [skiDate, setSkiDate] = useState("");
   const [skiTime, setSkiTime] = useState(0);
@@ -28,24 +31,44 @@ function UploadForm({ onSubmit }) {
   const [runs, setRuns] = useState(0);
   const [cost, setCost] = useState(0);
 
+  useEffect(() => {
+    const db = getDatabase();
+    const resortsRef = ref(db, 'Resorts');
+    
+    onValue(resortsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setResorts(Object.keys(data));
+      }
+    });
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = {
       resort: selectedResort,
       date: skiDate,
       skiTime,
-      skiDistance,
-      verticalDrop,
-      speed,
-      runs,
-      cost,
+      skiDistance: Number(skiDistance),
+      verticalDrop: Number(verticalDrop),
+      speed: Number(speed),
+      runs: Number(runs),
+      cost: Number(cost),
     };
     console.log("Form submitted:", formData);
     onSubmit(formData);
+    setSelectedResort("");
+    setSkiDate("");
+    setSkiTime(0);
+    setSkiDistance(0);
+    setVerticalDrop(0);
+    setSpeed(0);
+    setRuns(0);
+    setCost(0);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="col-12 col-lg-6 mx-auto">
       <section className="container form-content">
         <div className="row mb-4">
           <div className="col-md-6">
@@ -57,9 +80,9 @@ function UploadForm({ onSubmit }) {
               onChange={(event) => setSelectedResort(event.target.value)}
             >
               <option value="">Select a resort</option>
-              {resourceData.map((resort, index) => (
-                <option key={index} value={resort.Name}>
-                  {resort.Name}
+              {resorts.map((resort, index) => (
+                <option key={index} value={resort}>
+                  {resort}
                 </option>
               ))}
             </select>
@@ -80,20 +103,21 @@ function UploadForm({ onSubmit }) {
               id="ski-time"
               label="Ski Time (hours)"
               min="0"
+              max="24"
               value={skiTime}
               onChange={(event) => setSkiTime(Number(event.target.value))}
             />
-            <NumInput
+            <TextInput
               id="ski-distance"
+              type="number"
               label="Ski Distance (km)"
-              min="0"
               value={skiDistance}
               onChange={(event) => setSkiDistance(Number(event.target.value))}
             />
-            <NumInput
+            <TextInput
               id="vertical-drop"
+              type="number"
               label="Vertical Drop (m)"
-              min="0"
               value={verticalDrop}
               onChange={(event) => setVerticalDrop(Number(event.target.value))}
             />
@@ -103,20 +127,21 @@ function UploadForm({ onSubmit }) {
               id="speed"
               label="Speed (km/h)"
               min="0"
+              max="255"
               value={speed}
               onChange={(event) => setSpeed(Number(event.target.value))}
             />
-            <NumInput
+            <TextInput
               id="runs"
+              type="number"
               label="Runs"
-              min="0"
               value={runs}
               onChange={(event) => setRuns(Number(event.target.value))}
             />
-            <NumInput
+            <TextInput
               id="cost"
+              type="number"
               label="Cost ($)"
-              min="0"
               value={cost}
               onChange={(event) => setCost(Number(event.target.value))}
             />
@@ -131,10 +156,13 @@ function UploadForm({ onSubmit }) {
   );
 }
 
-// Summary component
 function Summary({ data }) {
   if (!data || data.length === 0) {
-    return <div>No data available for the selected season</div>;
+    return (
+      <div className="alert alert-warning" role="alert">
+        No data available for the selected season. Please enter your ski trips to generate a report.
+      </div>
+    );
   }
 
   const totalSkiDays = data.length;
@@ -165,7 +193,7 @@ function Summary({ data }) {
       </div>
       <div className='container d-flex m-3'>
         <div className='col'>
-          <p>Money Spent: ${totalMoneySpent.toFixed(2)}</p>
+          <p>Money Spent: ${totalMoneySpent}</p>
         </div>
         <div className='col'>
           <p>Unique Resorts: {uniqueResorts}</p>
@@ -178,10 +206,13 @@ function Summary({ data }) {
   );
 }
 
-// TopPerformance component
 const TopPerformance = ({ data }) => {
   if (!data || data.length === 0) {
-    return <div>No data available</div>;
+    return (
+      <div className="alert alert-warning" role="alert">
+        Please enter your ski trips to generate a report.
+      </div>
+    );
   }
 
   const longestSkiDistance = data.reduce((max, session) => session.skiDistance > max.skiDistance ? session : max, data[0]);
@@ -234,36 +265,67 @@ const TopPerformance = ({ data }) => {
   );
 };
 
-// Main component to combine everything
-export function SummaryApp() {
+export function SummaryApp({ currentUser }) {
   const [selectedSeason, setSelectedSeason] = useState('2023-2024');
-  const [seasonData, setSeasonData] = useState(TESTDATA[selectedSeason] || []);
-  const seasons = Object.keys(TESTDATA);
+  const [seasonData, setSeasonData] = useState([]);
+  const [seasons, setSeasons] = useState([]);
+
+  useEffect(() => {
+    if (!currentUser) return;
+
+    const db = getDatabase();
+    const userSeasonsRef = ref(db, `users/${currentUser.uid}/seasons`);
+    
+    onValue(userSeasonsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const seasonKeys = Object.keys(data);
+        setSeasons(seasonKeys);
+        if (seasonKeys.includes(selectedSeason)) {
+          setSeasonData(Object.values(data[selectedSeason]));
+        } else {
+          setSeasonData([]);
+        }
+      } else {
+        setSeasons([]);
+        setSeasonData([]);
+      }
+    });
+  }, [currentUser, selectedSeason]);
 
   const handleSeasonChange = (event) => {
     const newSeason = event.target.value;
     setSelectedSeason(newSeason);
-    setSeasonData(TESTDATA[newSeason] || []);
   };
 
   const handleFormSubmit = (formData) => {
-    // Update the TESTDATA with the new form data
-    setSeasonData([...seasonData, formData]);
-    console.log("New season data:", seasonData);
+    if (!currentUser) return;
+
+    const db = getDatabase();
+    const seasonRef = ref(db, `users/${currentUser.uid}/seasons/${selectedSeason}`);
+    const newTripRef = push(seasonRef);
+    set(newTripRef, formData);
   };
 
   return (
-    <div className="SummaryApp">
-      <h1>Snow Season Summary</h1>
-      <UploadForm onSubmit={handleFormSubmit} />
-      <div className="mt-5">
-        <SeasonSelector
-          seasons={seasons}
-          selectedSeason={selectedSeason}
-          onChange={handleSeasonChange}
-        />
-        <Summary data={seasonData} />
-        <TopPerformance data={seasonData} />
+    <div className='summary-page'>
+      <div className="container-wrapper">
+        <h1 className="text-center mb-5">Snow Season Summary</h1>
+        <div className="d-flex justify-content-center">
+          <div className="row w-100">
+
+            <UploadForm onSubmit={handleFormSubmit} />
+            <div className="col-12 col-lg-6 mx-auto">
+              <SeasonSelector
+                seasons={seasons}
+                selectedSeason={selectedSeason}
+                onChange={handleSeasonChange}
+              />
+              <Summary data={seasonData} />
+              <TopPerformance data={seasonData} />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

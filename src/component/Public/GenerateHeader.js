@@ -1,26 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth';
 
-export function HeaderBar(props) {
+export function HeaderBar({ currentUser, handleSignOut }) {
+  const auth = getAuth();
+
   return (
     <header className="header-container">
       <div className="nameAndDes">
-        <h1><Link className="app-name" to="/">Ski Resorts</Link></h1>
+        <h1><NavLink className="app-name" to="/">Ski Resorts</NavLink></h1>
         <p>Experience the thrill of the slopes like never before</p>
       </div>
       <ul className="nav">
         <li className="nav-item">
-          <Link to="/">Home</Link>
+          <NavLink className="nav-link" to="/">Home</NavLink>
         </li>
         <li className="nav-item">
-          <Link to="/upload">Upload</Link>
+          <NavLink className="nav-link" to="/upload">Upload</NavLink>
         </li>
         <li className="nav-item">
-          <Link to="/compare">Compare</Link>
+          <NavLink className="nav-link" to="/compare">Compare</NavLink>
         </li>
         <li className="nav-item">
-          <Link to="/summary">Summary</Link>
+          <NavLink className="nav-link" to="/summary">Summary</NavLink>
         </li>
+        {currentUser && currentUser.userId ? (
+          <>
+            <li className="nav-item">
+              <button className="btn btn-secondary ms-2" onClick={handleSignOut}>Sign Out</button>
+            </li>
+          </>
+        ) : (
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/signin">Sign In</NavLink>
+          </li>
+        )}
       </ul>
     </header>
   );
