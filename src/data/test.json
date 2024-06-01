@@ -1,0 +1,107 @@
+{
+    "2022-2023": [
+      {
+        "skiDistance": 20,
+        "verticalDrop": 450,
+        "speed": 55,
+        "runs": 12,
+        "arrivalTime": "08:00",
+        "temperature": -5,
+        "date": "2022-12-15",
+        "resort": "Alpine Meadows",
+        "skiTime": 4
+      },
+      {
+        "skiDistance": 22,
+        "verticalDrop": 470,
+        "speed": 58,
+        "runs": 14,
+        "arrivalTime": "08:30",
+        "temperature": -4,
+        "date": "2022-12-20",
+        "resort": "Snowbird",
+        "skiTime": 5
+      },
+      {
+        "skiDistance": 25,
+        "verticalDrop": 500,
+        "speed": 60,
+        "runs": 16,
+        "arrivalTime": "09:00",
+        "temperature": -6,
+        "date": "2023-01-10",
+        "resort": "Vail",
+        "skiTime": 6
+      }
+    ],
+    "2023-2024": [
+      {
+        "skiDistance": 30,
+        "verticalDrop": 550,
+        "speed": 65,
+        "runs": 18,
+        "arrivalTime": "08:15",
+        "temperature": -8,
+        "date": "2023-12-05",
+        "resort": "Whistler",
+        "skiTime": 7
+      },
+      {
+        "skiDistance": 35,
+        "verticalDrop": 600,
+        "speed": 70,
+        "runs": 20,
+        "arrivalTime": "08:45",
+        "temperature": -10,
+        "date": "2023-12-20",
+        "resort": "Aspen",
+        "skiTime": 8
+      },
+      {
+        "skiDistance": 28,
+        "verticalDrop": 530,
+        "speed": 62,
+        "runs": 15,
+        "arrivalTime": "09:00",
+        "temperature": -7,
+        "date": "2024-01-15",
+        "resort": "Alpine Meadows",
+        "skiTime": 5
+      }
+    ],
+    "2024-2025": [
+      {
+        "skiDistance": 25,
+        "verticalDrop": 520,
+        "speed": 63,
+        "runs": 17,
+        "arrivalTime": "08:30",
+        "temperature": -9,
+        "date": "2024-12-10",
+        "resort": "Snowbird",
+        "skiTime": 6
+      },
+      {
+        "skiDistance": 32,
+        "verticalDrop": 580,
+        "speed": 68,
+        "runs": 19,
+        "arrivalTime": "08:45",
+        "temperature": -11,
+        "date": "2025-01-05",
+        "resort": "Vail",
+        "skiTime": 7
+      },
+      {
+        "skiDistance": 29,
+        "verticalDrop": 540,
+        "speed": 64,
+        "runs": 18,
+        "arrivalTime": "09:00",
+        "temperature": -8,
+        "date": "2025-01-20",
+        "resort": "Whistler",
+        "skiTime": 6
+      }
+    ]
+  }
