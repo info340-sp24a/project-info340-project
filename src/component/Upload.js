@@ -8,7 +8,7 @@ import { TextInput } from "./InputText";
 import { NumInput } from "./InputNum";
 import { SelectInput } from "./InputSelect";
 
-export function UploadForm() {
+export function UploadForm({ currentUser }) {
   const [resortImage, setResortImage] = useState("");
   const [resortName, setResortName] = useState("");
   const [state, setState] = useState("");
@@ -108,10 +108,18 @@ export function UploadForm() {
             </div>
           </div>
           <div className="mt-4 d-grid gap-2 col-2 mx-auto">
-            <button type="submit" className="btn btn-outline-primary">Submit</button>
+            {currentUser ? (
+              <button type="submit" className="btn btn-outline-primary">Submit</button>
+            ) : (
+              <>
+                <button type="submit" className="btn btn-danger" disabled>Submit</button>
+                <div className="alert alert-warning mt-2" role="alert">
+                  You need to sign in to submit data.
+                </div>
+              </>
+            )}
           </div>
-          </div>
-          
+        </div>
       </section>
     </form>
   );

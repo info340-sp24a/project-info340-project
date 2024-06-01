@@ -16,54 +16,28 @@ export default function App() {
   const [currentInput, setcurrentInput] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
 
+  const changeUserFunction = (user) => {
+    setCurrentUser(user);
+  };
+
   const filterResort = (ResortInfo) => {
     setcurrentInput(ResortInfo);
-  }
-
-  const [stateFilter, setStateFilter] = useState('');
-  const [passFilter, setPassFilter] = useState('');
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1000);
-  const [minSlope, setMinSlope] = useState(0);
-  const [maxSlope, setMaxSlope] = useState(1000);
-
-  const handleStateChange = (state) => {
-    setStateFilter(state);
   };
 
-  const handlePassChange = (pass) => {
-    setPassFilter(pass);
-  };
-
-  const handleMinPriceChange = (price) => {
-    setMinPrice(price);
-  };
-
-  const handleMaxPriceChange = (price) => {
-    setMaxPrice(price);
-  };
-
-  const handleMinSlopeChange = (slope) => {
-    setMinSlope(slope);
-  };
-
-  const handleMaxSlopeChange = (slope) => {
-    setMaxSlope(slope);
-  };
-
-  const filteredResorts = INITIAL_RESORTS.filter(resort => 
-    resort.Name.toLowerCase().includes(currentInput.toLowerCase()) &&
-    resort.State.toLowerCase().includes(stateFilter.toLowerCase()) &&
-    (passFilter === '' || resort.Company === passFilter) &&
-    resort.Price >= minPrice && resort.Price <= maxPrice &&
-    resort["Number of Slopes"] >= minSlope && resort["Number of Slopes"] <= maxSlope
+  const filteredResorts = INITIAL_RESORTS.filter(resort =>
+    resort.Name.toLowerCase().includes(currentInput.toLowerCase())
   );
 
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setCurrentUser({ uid: user.uid, email: user.email, displayName: user.displayName, photoURL: user.photoURL });
+        setCurrentUser({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL
+        });
       } else {
         setCurrentUser(null);
       }
@@ -73,31 +47,24 @@ export default function App() {
 
   return (
     <>
-      <HeaderBar />
-      <main>
-        <Routes>
-          <Route path="/" element={
-            <>
-              <GenerateSandF 
-                filterResortFunction={filterResort}
-                handleStateChange={handleStateChange}
-                handlePassChange={handlePassChange}
-                handleMinPriceChange={handleMinPriceChange}
-                handleMaxPriceChange={handleMaxPriceChange}
-                handleMinSlopeChange={handleMinSlopeChange}
-                handleMaxSlopeChange={handleMaxSlopeChange}
-              />
-              <CardsPanel resourceData={filteredResorts} />
-            </>
-          } />
-          <Route path="index/:resortName" element={<ResortDetail />} />
-          <Route path="upload" element={<UploadForm />} />
-          <Route path="compare" element={<ResortComparison />} />
-          <Route path="/summary" element={<SummaryApp currentUser={currentUser} />} />
-          <Route path="/signin" element={<SignInPage currentUser={currentUser} changeUserFunction={setCurrentUser} />} />
-        </Routes>
-      </main>
-      <Footer />
+      <>
+        <HeaderBar currentUser={currentUser} changeUserFunction={changeUserFunction} />
+        <main>
+          <Routes>
+            <Route path="/" element={
+              <>
+                <GenerateSandF filterResortFunction={filterResort} />
+                <CardsPanel resourceData={filteredResorts} />
+              </>
+            }/>
+            <Route path="/compare" element={<ResortComparison />} />
+            <Route path="/upload" element={<UploadForm currentUser={currentUser} />} />
+            <Route path="/summary" element={<SummaryApp currentUser={currentUser} />} />
+            <Route path="/signin" element={<SignInPage currentUser={currentUser} changeUserFunction={changeUserFunction} />} />
+          </Routes>
+        </main>
+        <Footer />
+      </>
     </>
   );
 }
