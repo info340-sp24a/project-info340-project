@@ -154,11 +154,12 @@ footer p{
     color: white;
 }
 
- /* compare */
+
+/* compare */
 .compare-container {
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    align-items: flex-start;
     margin-top: 2rem;
     margin-bottom: 4rem;
 }
@@ -176,31 +177,62 @@ footer p{
 
 .resort-card {
     text-align: center;
+    margin: 0 10px;
+    background:#e3eceb;
 }
 
 .resort-image {
-    width: 100%;
-    height: auto;
+    width: 500px;
+    height: 300px;
+    object-fit: cover;
     display: block;
 }
 
 .resort-info {
     padding: 15px;
-    text-align: center;
+    text-align: left;
 }
 
 .resort-info h2 {
-    color: #007bff;
+    color: #34547c;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .resort-details {
     margin-top: 10px;
 }
 
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-right: 100px;
+}
+
+.search-input {
+    margin-bottom: 10px;
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
 .search-button:hover {
     background-color: #0056b3;
+    color: white;
 }
+
 
  /* upload */
 
