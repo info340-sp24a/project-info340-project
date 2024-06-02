@@ -84,6 +84,7 @@ ul, li {
 }
 
 .introduction article{
+    flex: auto;
     text-align: center;
     color: white;
     margin-bottom: 20px;
