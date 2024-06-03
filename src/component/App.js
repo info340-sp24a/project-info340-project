@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getDatabase, onValue, ref} from 'firebase/database';
 import { HeaderBar } from './Public/GenerateHeader.js';
 import { GenerateSandF } from './Homepage/SearchandFilter.js';
+import INITIAL_RESORTS from '../data/resourcedata.json';
 import { CardsPanel } from './Homepage/CardsPanel.js';
 import { Footer } from './Public/CreateFooter.js';
 import { UploadForm } from './Upload.js';
@@ -12,11 +12,9 @@ import { SummaryApp } from './Summary.js';
 import SignInPage from './SignInPage.js';
 import { ResortDetail } from './Public/CreateDetail.js'; // Assuming you have this component
 
-
 export default function App() {
   const [currentInput, setcurrentInput] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
-  const [allResorts, setallResorts] = useState([]);
 
   const changeUserFunction = (user) => {
     setCurrentUser(user);
@@ -26,44 +24,8 @@ export default function App() {
     setcurrentInput(ResortInfo);
   };
 
-  const [stateFilter, setStateFilter] = useState('');
-  const [passFilter, setPassFilter] = useState('');
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1000);
-  const [minSlope, setMinSlope] = useState(0);
-  const [maxSlope, setMaxSlope] = useState(1000);
-
-  const handleStateChange = (state) => {
-    setStateFilter(state);
-  };
-
-  const handlePassChange = (pass) => {
-    setPassFilter(pass);
-  };
-
-  const handleMinPriceChange = (price) => {
-    setMinPrice(price);
-  };
-
-  const handleMaxPriceChange = (price) => {
-    setMaxPrice(price);
-  };
-
-  const handleMinSlopeChange = (slope) => {
-    setMinSlope(slope);
-  };
-
-  const handleMaxSlopeChange = (slope) => {
-    setMaxSlope(slope);
-  };
-
-
-  const filteredResorts = allResorts.filter(resort => 
-    resort.resortName.toLowerCase().includes(currentInput.toLowerCase()) &&
-    resort.state.toLowerCase().includes(stateFilter.toLowerCase()) &&
-    (passFilter === '' || resort.passCompany === passFilter) &&
-    resort.ticketPrice >= minPrice && resort.ticketPrice <= maxPrice &&
-    resort.numLifts >= minSlope && resort.numLifts <= maxSlope
+  const filteredResorts = INITIAL_RESORTS.filter(resort =>
+    resort.Name.toLowerCase().includes(currentInput.toLowerCase())
   );
 
   useEffect(() => {
@@ -83,54 +45,27 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    const db = getDatabase();
-    const resortRef = ref(db, 'Resorts');
-
-    onValue(resortRef, (snapshot) => {
-      const allResortObj = snapshot.val();
-      if (allResortObj) {
-        const keyArray = Object.keys(allResortObj);
-        const allResortArray = keyArray.map((key) => {
-          const transformed = allResortObj[key];
-          transformed.firebaseKey = key;
-          return transformed;
-        });
-        setallResorts(allResortArray);
-      } else {
-        // Handle the case where there are no resorts
-        setallResorts([]); // Or any other appropriate handling
-      }
-    });
-  }, []);
-
   return (
     <>
+      <>
         <HeaderBar currentUser={currentUser} changeUserFunction={changeUserFunction} />
         <main>
           <Routes>
             <Route path="/" element={
               <>
-                <GenerateSandF 
-                filterResortFunction={filterResort}
-                handleStateChange={handleStateChange}
-                handlePassChange={handlePassChange}
-                handleMinPriceChange={handleMinPriceChange}
-                handleMaxPriceChange={handleMaxPriceChange}
-                handleMinSlopeChange={handleMinSlopeChange}
-                handleMaxSlopeChange={handleMaxSlopeChange}
-              />
-                <CardsPanel resourceData={filteredResorts}/>
+                <GenerateSandF filterResortFunction={filterResort} />
+                <CardsPanel resourceData={filteredResorts} />
               </>
             }/>
             <Route path="index/:resortName" element={<ResortDetail resourceData={filteredResorts}/>} />
-            <Route path="/compare" element={<ResortComparison />} />
+            <Route path="/compare" element={<ResortComparison allResorts={allResorts} />} />
             <Route path="/upload" element={<UploadForm currentUser={currentUser} />} />
             <Route path="/summary" element={<SummaryApp currentUser={currentUser} />} />
             <Route path="/signin" element={<SignInPage currentUser={currentUser} changeUserFunction={changeUserFunction} />} />
           </Routes>
         </main>
         <Footer />
+      </>
     </>
   );
 }
