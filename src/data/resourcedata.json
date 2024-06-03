@@ -1,43 +1,44 @@
 
+
 [
     {
-        "Name": "Steve Pass",
-        "State": "Washington",
-        "Price": 110,
-        "Number of Slopes": 50,
-        "Description": "good place to go",
-        "Company": "IKON",
-        "img": "/img/Steve.jpg"
+        "resortName": "Steve Pass",
+        "state": "Washington",
+        "ticketPrice": 110,
+        "numLifts": 50,
+        "description": "good place to go",
+        "passCompany": "IKON",
+        "resortImage": "/img/Steve.jpg"
       },
 
      {
-        "Name": "Crystal Mountain",
-        "State": "Washington",
-        "Price": 90,
-        "Number of Slopes": 40,
-        "Description": "nice place to go",
-        "Company": "IKON",
-        "img": "/img/crystal.jpg"
+        "resortName": "Crystal Mountain",
+        "state": "Washington",
+        "ticketPrice": 90,
+        "numLifts": 40,
+        "description": "nice place to go",
+        "passCompany": "IKON",
+        "resortImage": "/img/crystal.jpg"
       },
 
       {
-        "Name": "Snoqualmie Summit",
-        "State": "Washington",
-        "Price": 100,
-        "Number of Slopes": 80,
-        "Description": "nice place to go",
-        "Company": "EPIC",
-        "img": "/img/snoqualmie.jpg"
+        "resortName": "Snoqualmie Summit",
+        "state": "Washington",
+        "ticketPrice": 100,
+        "numLifts": 80,
+        "description": "nice place to go",
+        "passCompany": "EPIC",
+        "resortImage": "/img/snoqualmie.jpg"
       },
       
     {
-        "Name": "Mont Baker",
-        "State": "Washington",
-        "Price": 105,
-        "Number of Slopes": 80,
-        "Description": "beautiful place to go",
-        "Company": "Other",
-        "img": "/img/Baker.jpg"
+        "resortName": "Mont Baker",
+        "state": "Washington",
+        "ticketPrice": 105,
+        "numLifts": 80,
+        "description": "beautiful place to go",
+        "passCompany": "Other",
+        "resortImage": "/img/Baker.jpg"
       }
 ]
       

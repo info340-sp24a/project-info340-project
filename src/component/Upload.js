@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import '../index.css';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, push} from 'firebase/database';
+import { getDownloadURL, getStorage, ref as storageRef, uploadBytes} from 'firebase/storage';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { StateSelector } from "./SelectState";
@@ -9,7 +10,7 @@ import { NumInput } from "./InputNum";
 import { SelectInput } from "./InputSelect";
 
 export function UploadForm({ currentUser }) {
-  const [resortImage, setResortImage] = useState("");
+  const [resortImage, setResortImage] = useState(null);
   const [resortName, setResortName] = useState("");
   const [state, setState] = useState("");
   const [description, setDescription] = useState("");
@@ -17,34 +18,41 @@ export function UploadForm({ currentUser }) {
   const [ticketPrice, setTicketPrice] = useState(0);
   const [passCompany, setPassCompany] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = {
-      resortImage,
-      state,
-      description,
-      numLifts,
-      ticketPrice,
-      passCompany
-    };
 
-    const db = getDatabase();
-    const resortRef = ref(db, `Resorts/${resortName}`);
-    set(resortRef, formData)
-      .then(() => {
-        console.log("Data submitted successfully");
-        // Optionally, reset form fields after submission
-        setResortImage("");
-        setResortName("");
-        setState("");
-        setDescription("");
-        setNumLifts(0);
-        setTicketPrice(0);
-        setPassCompany("");
-      })
-      .catch((error) => {
-        console.error("Error submitting data: ", error);
-      });
+    const storage = getStorage();
+    const imageRef = storageRef(storage, `resortsIma/${resortName}.jpg`);
+
+    try {
+      await uploadBytes(imageRef, resortImage);
+      const url = await getDownloadURL(imageRef);
+
+      const formData = {
+        resortName,
+        resortImage: url,
+        state,
+        description,
+        numLifts,
+        ticketPrice,
+        passCompany
+      };
+
+      const db = getDatabase();
+      const resortRef = ref(db, `Resorts`);
+      await push(resortRef, formData);
+      console.log("Data submitted successfully");
+
+      setResortImage(null);
+      setResortName("");
+      setState("");
+      setDescription("");
+      setNumLifts(0);
+      setTicketPrice(0);
+      setPassCompany("");
+    } catch (error) {
+      console.error("Error submitting data: ", error);
+    }
   };
 
   return (
@@ -54,12 +62,11 @@ export function UploadForm({ currentUser }) {
           <h2 className="mb-5 text-center">Upload Your Ski Resort</h2>
           <div className="row mb-4">
             <div className="col-md-6">
-              <TextInput
+              <label htmlFor="resort-image">Resort Image upload</label>
+              <input
                 id="resort-image"
-                label="Resort Image upload"
                 type="file"
-                value={resortImage}
-                onChange={(event) => setResortImage(event.target.value)}
+                onChange={(event) => setResortImage(event.target.files[0])}
               />
             </div>
 

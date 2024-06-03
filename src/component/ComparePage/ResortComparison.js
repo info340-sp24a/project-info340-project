@@ -16,12 +16,12 @@ function ResortComparison(resort) {
                         <img src="img/ski.jpg" alt="Placeholder for Resort 2" className="resort-image"/>
                         <div className="resort-info">
                             <h2>Resort Name 1</h2>
-                            <p>State: {resort.State}</p>
-                            <p>Price: ${resort.Price}</p>
-                            <p>Number of Slopes: {resort['Number of Slopes']}</p>
-                            <p>Description: {resort.Description}</p>
-                            <p>Company: {resort.Company}</p>
-                            <p>Description: {resort.Description}</p>
+                            <p>State: {resort.state}</p>
+                            <p>Price: ${resort.ticketPrice}</p>
+                            <p>Number of Slopes: {resort.numLifts}</p>
+                            <p>Description: {resort.description}</p>
+                            <p>Company: {resort.passCompany}</p>
+                            <p>Description: {resort.description}</p>
                         </div>
                     </div>
                 </div>
@@ -38,12 +38,12 @@ function ResortComparison(resort) {
                         <img src="img/ski.jpg" alt="Placeholder for Resort 2" className="resort-image"/>
                         <div className="resort-info">
                             <h2>Resort Name 1</h2>
-                            <p>State: {resort.State}</p>
-                            <p>Price: ${resort.Price}</p>
-                            <p>Number of Slopes: {resort['Number of Slopes']}</p>
-                            <p>Description: {resort.Description}</p>
-                            <p>Company: {resort.Company}</p>
-                            <p>Description: {resort.Description}</p>
+                            <p>State: {resort.state}</p>
+                            <p>Price: ${resort.ticketPrice}</p>
+                            <p>Number of Slopes: {resort.numLifts}</p>
+                            <p>Description: {resort.description}</p>
+                            <p>Company: {resort.passCompany}</p>
+                            <p>Description: {resort.description}</p>
                         </div>
                     </div>
                 </div>

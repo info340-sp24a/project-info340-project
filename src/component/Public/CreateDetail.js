@@ -1,14 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import INITIAL_RESORTS from '../../data/resourcedata.json';
 import _ from 'lodash';
 
 export function ResortDetail(props) {
+  const { resourceData } = props;
   const { resortName } = useParams(); // Get the resort name from the URL parameters
   const ResortNameString = resortName; // This is already the correct value
-  console.log(ResortNameString);
   // Find the resort in the data using lodash
-  let resort = _.find(INITIAL_RESORTS, { Name: ResortNameString });
+  let resort = _.find(resourceData, { firebaseKey: ResortNameString });
 
   // If the resort is not found, show a message
   if (!resort) return <h2>No resort specified</h2>;
@@ -16,21 +15,21 @@ export function ResortDetail(props) {
   // Render the resort details
   return (
     <div className="introduction">
-      <img src={resort.img} className="d-none d-md-block" alt={resort.name} />
+      <img src={resort.resortImage} className="d-none d-md-block" alt={resort.resortName} />
       {/* You can add more resort details here */}
       <article>
         <h1>Crystal Mountain Resort</h1>
         <h3>State</h3>
-        <p>{resort.State}</p>
+        <p>{resort.state}</p>
         <h3>Price</h3>
-        <p>{resort.Price}</p>
+        <p>{resort.ticketPrice}</p>
         <h3>Number of Slopes
         </h3>
-        <p>{resort["Number of Slopes"]}</p>
+        <p>{resort.numLifts}</p>
         <h3>Description</h3>
-        <p>{resort.Description}</p>
+        <p>{resort.description}</p>
         <h3>Company</h3>
-        <p>{resort.Company}</p>
+        <p>{resort.passCompany}</p>
       </article>
     </div>
   );
