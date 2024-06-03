@@ -38,7 +38,11 @@ function UploadForm({ onSubmit, currentUser }) {
     onValue(resortsRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        setResorts(Object.keys(data));
+        const resortsArray = Object.keys(data).map(key => ({
+          id: key,
+          ...data[key]
+        }));
+        setResorts(resortsArray);
       }
     });
   }, []);
@@ -50,8 +54,10 @@ function UploadForm({ onSubmit, currentUser }) {
       return;
     }
 
+    const selectedResortName = resorts.find(resort => resort.id === selectedResort)?.resortName || "";
+
     const formData = {
-      resort: selectedResort,
+      resortName: selectedResortName,
       date: skiDate,
       skiTime,
       skiDistance: Number(skiDistance),
@@ -73,7 +79,7 @@ function UploadForm({ onSubmit, currentUser }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="col-12 col-lg-6 mx-auto">
+    <form onSubmit={handleSubmit} className="col-12 col-lg-6 mb-3 mx-auto">
       <section className="container form-content">
         <div className="row mb-4">
           <div className="col-md-6">
@@ -85,9 +91,9 @@ function UploadForm({ onSubmit, currentUser }) {
               onChange={(event) => setSelectedResort(event.target.value)}
             >
               <option value="">Select a resort</option>
-              {resorts.map((resort, index) => (
-                <option key={index} value={resort}>
-                  {resort}
+              {resorts.map((resort) => (
+                <option key={resort.id} value={resort.id}>
+                  {resort.resortName}
                 </option>
               ))}
             </select>
@@ -153,9 +159,9 @@ function UploadForm({ onSubmit, currentUser }) {
           </div>
         </div>
 
-        <div className="mt-4 d-grid gap-2 col-2 mx-auto">
+        <div className="mt-4 d-grid gap-2 col-6 mx-auto">
         {currentUser ? (
-          <button type="submit" className="btn btn-outline-light" disabled={!currentUser}>Submit</button>
+          <button type="submit" className="btn btn-outline-light">Submit</button>
         ) : (
           <>
             <button type="submit" className="btn btn-danger" disabled={!currentUser}>Submit</button>
@@ -183,9 +189,9 @@ function Summary({ data }) {
   const totalSkiHours = data.reduce((sum, session) => sum + session.skiTime, 0);
   const totalSkiDistance = data.reduce((sum, session) => sum + session.skiDistance, 0);
   const totalMoneySpent = data.reduce((sum, session) => sum + session.cost, 0);
-  const uniqueResorts = [...new Set(data.map(session => session.resort))].length;
+  const uniqueResorts = [...new Set(data.map(session => session.resortName))].length;
   const resortVisits = data.reduce((acc, session) => {
-    acc[session.resort] = (acc[session.resort] || 0) + 1;
+    acc[session.resortName] = (acc[session.resortName] || 0) + 1;
     return acc;
   }, {});
 
@@ -194,26 +200,26 @@ function Summary({ data }) {
   return (
     <div className="summary">
       <h2>Season Summary</h2>
-      <div className='container d-flex m-3'>
-        <div className='col'>
-          <p>Ski Days: {totalSkiDays}</p>
-        </div>
-        <div className='col'>
-          <p>Ski Hours: {totalSkiHours}</p>
-        </div>
-        <div className='col'>
-          <p>Ski Distance: {totalSkiDistance} km</p>
-        </div>
-      </div>
-      <div className='container d-flex m-3'>
-        <div className='col'>
-          <p>Money Spent: ${totalMoneySpent}</p>
-        </div>
-        <div className='col'>
-          <p>Unique Resorts: {uniqueResorts}</p>
-        </div>
-        <div className='col'>
-          <p>Favorite Resort: {favoriteResort}</p>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
+            <p>Ski Days: {totalSkiDays}</p>
+          </div>
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
+            <p>Ski Hours: {totalSkiHours}</p>
+          </div>
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
+            <p>Ski Distance: {totalSkiDistance} km</p>
+          </div>
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
+            <p>Money Spent: ${totalMoneySpent}</p>
+          </div>
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
+            <p>Unique Resorts: {uniqueResorts}</p>
+          </div>
+          <div className="col-lg-4 col-md-6 col-sm-12 mb-3">
+            <p>Favorite Resort: {favoriteResort}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -234,50 +240,57 @@ const TopPerformance = ({ data }) => {
   const fastestSpeed = data.reduce((max, session) => session.speed > max.speed ? session : max, data[0]);
   const mostRuns = data.reduce((max, session) => session.runs > max.runs ? session : max, data[0]);
 
+  const performanceData = [
+    {
+      metric: 'Longest Ski Distance',
+      resortName: longestSkiDistance.resortName,
+      value: `${longestSkiDistance.skiDistance} km`,
+      date: longestSkiDistance.date,
+    },
+    {
+      metric: 'Max Vertical Drop',
+      resortName: maxVerticalDrop.resortName,
+      value: `${maxVerticalDrop.verticalDrop} m`,
+      date: maxVerticalDrop.date,
+    },
+    {
+      metric: 'Fastest Speed',
+      resortName: fastestSpeed.resortName,
+      value: `${fastestSpeed.speed} km/h`,
+      date: fastestSpeed.date,
+    },
+    {
+      metric: 'Most Runs in a Day',
+      resortName: mostRuns.resortName,
+      value: mostRuns.runs,
+      date: mostRuns.date,
+    },
+  ];
+
   return (
-    <div className="">
+    <div className="top-performance">
       <h2>Top Performance</h2>
-      <div className="container m-3">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Metric</th>
-              <th scope="col">Resort</th>
-              <th scope="col">Value</th>
-              <th scope="col">Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Longest Ski Distance</td>
-              <td>{longestSkiDistance.resort}</td>
-              <td>{longestSkiDistance.skiDistance} km</td>
-              <td>{longestSkiDistance.date}</td>
-            </tr>
-            <tr>
-              <td>Max Vertical Drop</td>
-              <td>{maxVerticalDrop.resort}</td>
-              <td>{maxVerticalDrop.verticalDrop} m</td>
-              <td>{maxVerticalDrop.date}</td>
-            </tr>
-            <tr>
-              <td>Fastest Speed</td>
-              <td>{fastestSpeed.resort}</td>
-              <td>{fastestSpeed.speed} km/h</td>
-              <td>{fastestSpeed.date}</td>
-            </tr>
-            <tr>
-              <td>Most Runs in a Day</td>
-              <td>{mostRuns.resort}</td>
-              <td>{mostRuns.runs}</td>
-              <td>{mostRuns.date}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="container">
+        <div className="row">
+          {performanceData.map((item, index) => (
+            <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-3">
+              <div className="card h-100">
+                <div className="card-body">
+                  <h5 className="card-title">{item.metric}</h5>
+                  <p className="card-text"><strong>Resort:</strong> {item.resortName}</p>
+                  <p className="card-text"><strong>Value:</strong> {item.value}</p>
+                  <p className="card-text"><strong>Date:</strong> {item.date}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
+
+export default TopPerformance;
 
 export function SummaryApp({ currentUser }) {
   const [selectedSeason, setSelectedSeason] = useState('2023-2024');
@@ -327,7 +340,7 @@ export function SummaryApp({ currentUser }) {
   return (
     <div className='summary-page'>
       <div className="container-wrapper">
-        <h1 className="text-center mb-5">Snow Season Summary</h1>
+        <h1 className="text-center m-5">Snow Season Summary</h1>
         <div className="d-flex justify-content-center">
           <div className="row w-100">
             <UploadForm onSubmit={handleFormSubmit} currentUser={currentUser} />

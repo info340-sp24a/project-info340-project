@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import '../index.css';
-import { getDatabase, ref, push} from 'firebase/database';
-import { getDownloadURL, getStorage, ref as storageRef, uploadBytes} from 'firebase/storage';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import { StateSelector } from "./SelectState";
+import { getDatabase, ref, push } from 'firebase/database';
+import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from 'firebase/storage';
 import { TextInput } from "./InputText";
 import { NumInput } from "./InputNum";
 import { SelectInput } from "./InputSelect";
+import { StateSelector } from "./SelectState";
 
 export function UploadForm({ currentUser }) {
   const [resortImage, setResortImage] = useState(null);
@@ -22,7 +20,7 @@ export function UploadForm({ currentUser }) {
     event.preventDefault();
 
     const storage = getStorage();
-    const imageRef = storageRef(storage, `resortsIma/${resortName}.jpg`);
+    const imageRef = storageRef(storage, `resortsImages/${resortName}.jpg`);
 
     try {
       await uploadBytes(imageRef, resortImage);
@@ -69,7 +67,6 @@ export function UploadForm({ currentUser }) {
                 onChange={(event) => setResortImage(event.target.files[0])}
               />
             </div>
-
             <div className="col-md-6">
               <TextInput
                 id="resort-name"

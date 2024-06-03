@@ -25,8 +25,8 @@ export default function SignInPage({ currentUser, changeUserFunction }) {
 
   const handleLogout = () => {
     auth.signOut().then(() => {
-      changeUserFunction(null); // Clear the user data
-      navigate('/signin'); // Redirect to the sign-in page
+      changeUserFunction(null); 
+      navigate('/signin');
     }).catch((error) => {
       console.error("Sign-out error:", error);
     });

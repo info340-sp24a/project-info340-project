@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, onValue, ref} from 'firebase/database';
-import { HeaderBar } from './Public/GenerateHeader.js';
-import { GenerateSandF } from './Homepage/SearchandFilter.js';
-import { CardsPanel } from './Homepage/CardsPanel.js';
-import { Footer } from './Public/CreateFooter.js';
+import { HeaderBar } from './GenerateHeader.js';
+import { GenerateSandF } from './SearchandFilter.js';
+import { CardsPanel } from './CardsPanel.js';
+import { Footer } from './CreateFooter.js';
 import { UploadForm } from './Upload.js';
-import { ResortComparison } from './ComparePage/ResortComparison.js';
+import { ResortComparison } from './ResortComparison.js';
 import { SummaryApp } from './Summary.js';
 import SignInPage from './SignInPage.js';
-import { ResortDetail } from './Public/CreateDetail.js'; // Assuming you have this component
+import { ResortDetail } from './CreateDetail.js'; 
 
 
 export default function App() {
@@ -98,8 +98,7 @@ export default function App() {
         });
         setallResorts(allResortArray);
       } else {
-        // Handle the case where there are no resorts
-        setallResorts([]); // Or any other appropriate handling
+        setallResorts([]); 
       }
     });
   }, []);
