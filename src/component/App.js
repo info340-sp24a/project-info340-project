@@ -1,42 +1,70 @@
-import React, { useState } from 'react';
-import {HeaderBar} from './Public/GenerateHeader.js';
+import React, { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { HeaderBar } from './Public/GenerateHeader.js';
 import { GenerateSandF } from './Homepage/SearchandFilter.js';
-import INITIAL_RESORTS from '../data/resourcedata.json'
+import INITIAL_RESORTS from '../data/resourcedata.json';
 import { CardsPanel } from './Homepage/CardsPanel.js';
-import {Footer} from './Public/CreateFooter.js'
-import { UploadForm } from './Uploadpage/Upload.js';
-import { CreateCrystal } from './Public/Crystal.js';
-import { CreateBaker } from './Public/Baker.js';
-import { CreateSnoq } from './Public/Snoqualmie.js';
-import { CreateSteve } from './Public/Steve.js';
+import { Footer } from './Public/CreateFooter.js';
+import { UploadForm } from './Upload.js';
 import { ResortComparison } from './ComparePage/ResortComparison.js';
+import { SummaryApp } from './Summary.js';
+import SignInPage from './SignInPage.js';
+import { ResortDetail } from './Public/CreateDetail.js'; // Assuming you have this component
 
-export default function App(){
-
+export default function App() {
   const [currentInput, setcurrentInput] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const changeUserFunction = (user) => {
+    setCurrentUser(user);
+  };
 
   const filterResort = (ResortInfo) => {
     setcurrentInput(ResortInfo);
-  }
+  };
 
-  const filteredResorts = INITIAL_RESORTS.filter(resort => 
-    resort.Name.toLowerCase().includes(currentInput.toLocaleLowerCase())
+  const filteredResorts = INITIAL_RESORTS.filter(resort =>
+    resort.Name.toLowerCase().includes(currentInput.toLowerCase())
   );
 
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL
+        });
+      } else {
+        setCurrentUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
+    <>
       <>
-          <HeaderBar />
-          <main>
-              <GenerateSandF filterResortFunction = {filterResort}/>
-              <CardsPanel resourceData={filteredResorts}/>
-              {/*<UploadForm />*/}
-              {/*<CreateCrystal />*/}
-              {/*<CreateBaker />*/}
-              {/*<CreateSnoq />*/}
-              {/*<CreateSteve />*/}
-              {/* <ResortComparison /> */}
-          </main>
-          <Footer />
+        <HeaderBar currentUser={currentUser} changeUserFunction={changeUserFunction} />
+        <main>
+          <Routes>
+            <Route path="/" element={
+              <>
+                <GenerateSandF filterResortFunction={filterResort} />
+                <CardsPanel resourceData={filteredResorts} />
+              </>
+            }/>
+            <Route path="/compare" element={<ResortComparison />} />
+            <Route path="/upload" element={<UploadForm currentUser={currentUser} />} />
+            <Route path="/summary" element={<SummaryApp currentUser={currentUser} />} />
+            <Route path="/signin" element={<SignInPage currentUser={currentUser} changeUserFunction={changeUserFunction} />} />
+          </Routes>
+        </main>
+        <Footer />
       </>
+    </>
   );
 }
