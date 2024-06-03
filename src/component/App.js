@@ -57,7 +57,8 @@ export default function App() {
                 <CardsPanel resourceData={filteredResorts} />
               </>
             }/>
-            <Route path="/compare" element={<ResortComparison />} />
+            <Route path="index/:resortName" element={<ResortDetail resourceData={filteredResorts}/>} />
+            <Route path="/compare" element={<ResortComparison allResorts={allResorts} />} />
             <Route path="/upload" element={<UploadForm currentUser={currentUser} />} />
             <Route path="/summary" element={<SummaryApp currentUser={currentUser} />} />
             <Route path="/signin" element={<SignInPage currentUser={currentUser} changeUserFunction={changeUserFunction} />} />
