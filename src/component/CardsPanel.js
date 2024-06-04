@@ -5,7 +5,7 @@ export function CardsPanel(props){
 const {resourceData} = props;
 
 const Allcards = resourceData.map((resort) => {
-    return <GenerateCard key={resort.Name} resortData = {resort}/>
+    return <GenerateCard key={resort.resortName} resortData = {resort}/>
 });
 
 return (
