@@ -93,9 +93,9 @@ export function UploadForm({ currentUser }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="container form-content">
-      <section className="container container-wrapper">
-        <div className="form-content">
+    <form onSubmit={handleSubmit} className="upload-container">
+      <section className="upload-container upload-container-wrapper">
+        <div className="upload-form-content">
           <h2 className="m-5 text-center">Upload Your Ski Resort</h2>
           {submitStatus === "success" && (
             <div className="alert alert-success" role="alert">
@@ -130,8 +130,8 @@ export function UploadForm({ currentUser }) {
                 onChange={handleResortNameChange}
               />
               <div className="mb-3">
-                <label htmlFor="state" className="form-label">State:</label>
-                <StateSelector value={state} onChange={handleStateChange} />
+                <label htmlFor="state" className="upload-form-label">State:</label>
+                <StateSelector id="state" value={state} onChange={handleStateChange} />
               </div>
               <TextInput
                 id="description"
