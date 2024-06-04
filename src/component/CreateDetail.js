@@ -8,6 +8,7 @@ export function ResortDetail(props) {
   const ResortNameString = resortName; // This is already the correct value
   // Find the resort in the data using lodash
   let resort = _.find(resourceData, { firebaseKey: ResortNameString });
+  console.log(resort.resortName);
 
   // If the resort is not found, show a message
   if (!resort) return <h2>No resort specified</h2>;
@@ -18,7 +19,7 @@ export function ResortDetail(props) {
       <img src={resort.resortImage} className="d-none d-md-block" alt={resort.resortName} />
       {/* You can add more resort details here */}
       <article>
-        <h1>Crystal Mountain Resort</h1>
+        <h1>{resort.resortName}</h1>
         <h3>State</h3>
         <p>{resort.state}</p>
         <h3>Price</h3>
