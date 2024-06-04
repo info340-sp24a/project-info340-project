@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate} from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, onValue, ref} from 'firebase/database';
 import { HeaderBar } from './GenerateHeader.js';
@@ -126,6 +126,7 @@ export default function App() {
             <Route path="/compare" element={<ResortComparison allResorts={allResorts} />} />
             <Route path="/upload" element={<UploadForm currentUser={currentUser} />} />
             <Route path="/summary" element={<SummaryApp currentUser={currentUser} />} />
+            <Route path="*" element={<Navigate to="/" />} />
             <Route path="/signin" element={<SignInPage currentUser={currentUser} changeUserFunction={changeUserFunction} />} />
           </Routes>
         </main>
