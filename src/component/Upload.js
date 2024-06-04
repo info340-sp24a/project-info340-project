@@ -15,9 +15,16 @@ export function UploadForm({ currentUser }) {
   const [numLifts, setNumLifts] = useState(0);
   const [ticketPrice, setTicketPrice] = useState(0);
   const [passCompany, setPassCompany] = useState("");
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!resortName || !resortImage || !state || !description || !numLifts || !ticketPrice || !passCompany) {
+      setErrorMessage("Please fill out all required fields.");
+      setSubmitStatus(null);
+      return;
+    }
 
     const storage = getStorage();
     const imageRef = storageRef(storage, `resortsImages/${resortName}.jpg`);
@@ -48,23 +55,70 @@ export function UploadForm({ currentUser }) {
       setNumLifts(0);
       setTicketPrice(0);
       setPassCompany("");
+      setSubmitStatus("success");
+      setErrorMessage("");
     } catch (error) {
       console.error("Error submitting data: ", error);
+      setSubmitStatus("error");
+      setErrorMessage("Error submitting data, please try again.");
     }
   };
 
+  const handleImageChange = (event) => {
+    setResortImage(event.target.files[0]);
+  };
+
+  const handleResortNameChange = (event) => {
+    setResortName(event.target.value);
+  };
+
+  const handleStateChange = (event) => {
+    setState(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleNumLiftsChange = (event) => {
+    setNumLifts(Number(event.target.value));
+  };
+
+  const handleTicketPriceChange = (event) => {
+    setTicketPrice(Number(event.target.value));
+  };
+
+  const handlePassCompanyChange = (event) => {
+    setPassCompany(event.target.value);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="summary-page">
+    <form onSubmit={handleSubmit} className="container form-content">
       <section className="container container-wrapper">
         <div className="form-content">
-          <h2 className="mb-5 text-center">Upload Your Ski Resort</h2>
+          <h2 className="m-5 text-center">Upload Your Ski Resort</h2>
+          {submitStatus === "success" && (
+            <div className="alert alert-success" role="alert">
+              Data submitted successfully!
+            </div>
+          )}
+          {submitStatus === "error" && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage}
+            </div>
+          )}
+          {errorMessage && (
+            <div className="alert alert-warning" role="alert">
+              {errorMessage}
+            </div>
+          )}
           <div className="row mb-4">
             <div className="col-md-6">
               <label htmlFor="resort-image">Resort Image upload</label>
               <input
                 id="resort-image"
                 type="file"
-                onChange={(event) => setResortImage(event.target.files[0])}
+                onChange={handleImageChange}
               />
             </div>
             <div className="col-md-6">
@@ -73,18 +127,18 @@ export function UploadForm({ currentUser }) {
                 label="Resort Name"
                 placeholder="Enter the resort name"
                 value={resortName}
-                onChange={(event) => setResortName(event.target.value)}
+                onChange={handleResortNameChange}
               />
               <div className="mb-3">
                 <label htmlFor="state" className="form-label">State:</label>
-                <StateSelector value={state} onChange={(event) => setState(event.target.value)} />
+                <StateSelector value={state} onChange={handleStateChange} />
               </div>
               <TextInput
                 id="description"
                 label="Brief Description"
                 placeholder="Enter a brief description"
                 value={description}
-                onChange={(event) => setDescription(event.target.value)}
+                onChange={handleDescriptionChange}
               />
               <NumInput
                 id="num-lifts"
@@ -92,7 +146,7 @@ export function UploadForm({ currentUser }) {
                 min="0"
                 max="50"
                 value={numLifts}
-                onChange={(event) => setNumLifts(Number(event.target.value))}
+                onChange={handleNumLiftsChange}
               />
               <NumInput
                 id="ticket-price"
@@ -100,14 +154,14 @@ export function UploadForm({ currentUser }) {
                 min="0"
                 max="1000"
                 value={ticketPrice}
-                onChange={(event) => setTicketPrice(Number(event.target.value))}
+                onChange={handleTicketPriceChange}
               />
               <SelectInput
                 id="pass-company"
                 label="Pass Company"
                 options={["IKON", "EPIC", "Other"]}
                 value={passCompany}
-                onChange={(event) => setPassCompany(event.target.value)}
+                onChange={handlePassCompanyChange}
               />
             </div>
           </div>

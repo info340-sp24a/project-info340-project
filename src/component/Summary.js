@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue, push, set } from 'firebase/database';
 import { TextInput } from "./InputText";
 import { NumInput } from "./InputNum";
-import '../index.css'; 
+import '../index.css';
 
 function SeasonSelector({ seasons, selectedSeason, onChange }) {
   if (seasons.length === 0) {
@@ -30,6 +30,7 @@ function UploadForm({ onSubmit, currentUser }) {
   const [speed, setSpeed] = useState(0);
   const [runs, setRuns] = useState(0);
   const [cost, setCost] = useState(0);
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     const db = getDatabase();
@@ -47,10 +48,21 @@ function UploadForm({ onSubmit, currentUser }) {
     });
   }, []);
 
+  const resortOptions = resorts.map((resort) => (
+    <option key={resort.id} value={resort.id}>
+      {resort.resortName}
+    </option>
+  ));
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!currentUser) {
       console.error("User not signed in");
+      return;
+    }
+
+    if (!selectedResort || !skiDate || !skiTime || !skiDistance || !verticalDrop || !speed || !runs || !cost) {
+      alert("Please fill out all fields");
       return;
     }
 
@@ -68,6 +80,7 @@ function UploadForm({ onSubmit, currentUser }) {
     };
     console.log("Form submitted:", formData);
     onSubmit(formData);
+
     setSelectedResort("");
     setSkiDate("");
     setSkiTime(0);
@@ -76,6 +89,11 @@ function UploadForm({ onSubmit, currentUser }) {
     setSpeed(0);
     setRuns(0);
     setCost(0);
+    setSuccessMessage("Form submitted successfully!");
+
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000); 
   };
 
   return (
@@ -91,11 +109,7 @@ function UploadForm({ onSubmit, currentUser }) {
               onChange={(event) => setSelectedResort(event.target.value)}
             >
               <option value="">Select a resort</option>
-              {resorts.map((resort) => (
-                <option key={resort.id} value={resort.id}>
-                  {resort.resortName}
-                </option>
-              ))}
+              {resortOptions}
             </select>
           </div>
           <div className="col-md-6">
@@ -159,17 +173,23 @@ function UploadForm({ onSubmit, currentUser }) {
           </div>
         </div>
 
-        <div className="mt-4 d-grid gap-2 col-6 mx-auto">
-        {currentUser ? (
-          <button type="submit" className="btn btn-outline-light">Submit</button>
-        ) : (
-          <>
-            <button type="submit" className="btn btn-danger" disabled={!currentUser}>Submit</button>
-            <div className="alert alert-warning mt-2" role="alert">
-              You need to sign in to submit data.
-            </div>
-          </>
+        {successMessage && (
+          <div className="alert alert-success mt-2" role="alert">
+            {successMessage}
+          </div>
         )}
+
+        <div className="mt-4 d-grid gap-2 col-6 mx-auto">
+          {currentUser ? (
+            <button type="submit" className="btn btn-outline-light">Submit</button>
+          ) : (
+            <>
+              <button type="submit" className="btn btn-danger" disabled={!currentUser}>Submit</button>
+              <div className="alert alert-warning mt-2" role="alert">
+                You need to sign in to submit data.
+              </div>
+            </>
+          )}
         </div>
       </section>
     </form>
@@ -226,7 +246,7 @@ function Summary({ data }) {
   );
 }
 
-const TopPerformance = ({ data }) => {
+function TopPerformance({ data }) {
   if (!data || data.length === 0) {
     return (
       <div className="alert alert-warning" role="alert">
@@ -235,10 +255,15 @@ const TopPerformance = ({ data }) => {
     );
   }
 
-  const longestSkiDistance = data.reduce((max, session) => session.skiDistance > max.skiDistance ? session : max, data[0]);
-  const maxVerticalDrop = data.reduce((max, session) => session.verticalDrop > max.verticalDrop ? session : max, data[0]);
-  const fastestSpeed = data.reduce((max, session) => session.speed > max.speed ? session : max, data[0]);
-  const mostRuns = data.reduce((max, session) => session.runs > max.runs ? session : max, data[0]);
+  const getLongestSkiDistance = () => data.reduce((max, session) => session.skiDistance > max.skiDistance ? session : max, data[0]);
+  const getMaxVerticalDrop = () => data.reduce((max, session) => session.verticalDrop > max.verticalDrop ? session : max, data[0]);
+  const getFastestSpeed = () => data.reduce((max, session) => session.speed > max.speed ? session : max, data[0]);
+  const getMostRuns = () => data.reduce((max, session) => session.runs > max.runs ? session : max, data[0]);
+
+  const longestSkiDistance = getLongestSkiDistance();
+  const maxVerticalDrop = getMaxVerticalDrop();
+  const fastestSpeed = getFastestSpeed();
+  const mostRuns = getMostRuns();
 
   const performanceData = [
     {
@@ -267,30 +292,30 @@ const TopPerformance = ({ data }) => {
     },
   ];
 
+  const performanceCards = performanceData.map((item, index) => (
+    <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-3">
+      <div className="card h-100">
+        <div className="card-body">
+          <h5 className="card-title">{item.metric}</h5>
+          <p className="card-text"><strong>Resort:</strong> {item.resortName}</p>
+          <p className="card-text"><strong>Value:</strong> {item.value}</p>
+          <p className="card-text"><strong>Date:</strong> {item.date}</p>
+        </div>
+      </div>
+    </div>
+  ));
+
   return (
     <div className="top-performance">
       <h2>Top Performance</h2>
       <div className="container">
         <div className="row">
-          {performanceData.map((item, index) => (
-            <div key={index} className="col-lg-3 col-md-6 col-sm-12 mb-3">
-              <div className="card h-100">
-                <div className="card-body">
-                  <h5 className="card-title">{item.metric}</h5>
-                  <p className="card-text"><strong>Resort:</strong> {item.resortName}</p>
-                  <p className="card-text"><strong>Value:</strong> {item.value}</p>
-                  <p className="card-text"><strong>Date:</strong> {item.date}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+          {performanceCards}
         </div>
       </div>
     </div>
   );
-};
-
-export default TopPerformance;
+}
 
 export function SummaryApp({ currentUser }) {
   const [selectedSeason, setSelectedSeason] = useState('2023-2024');
